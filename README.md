@@ -19,14 +19,26 @@ There are four types of resources: links & files, tutorial, PhETs(simulations) a
 
 **Screen Shots**
 
+                            Front Page (Desktop Version)
+
 <img src="https://github.com/Duttabhi/School-Content-Resource-System/blob/master/Screenshot%20from%202018-06-30%2013-38-03.png" width=720>
+
+                       Search Options (to select different subjects).
 
 <img src="https://github.com/Duttabhi/School-Content-Resource-System/blob/master/Screenshot%20from%202018-06-30%2013-38-13.png" width=720>
 
+                             Nested Search to select courses.
+
 <img src="https://github.com/Duttabhi/School-Content-Resource-System/blob/master/Screenshot%20from%202018-06-30%2013-38-38.png" width=720>
+
+                              Videos Embedded in the portal.
 
 <img src="https://github.com/Duttabhi/School-Content-Resource-System/blob/master/Screenshot%20from%202018-06-30%2013-39-55.png" width=720>
 
+                               Screen Shot for Mobile Version.
+
 <img src="https://github.com/Duttabhi/School-Content-Resource-System/blob/master/Screenshot%20from%202018-06-30%2013-43-59.png" width=450>
+
+                       User options to upload videos after login.
 
 <img src="https://github.com/Duttabhi/School-Content-Resource-System/blob/master/Screenshot%20from%202018-06-30%2013-44-32.png" width=720>
