@@ -19,4 +19,4 @@ There are four types of resources: links & files, tutorial, PhETs(simulations) a
 
 **Screen Shots**
 
-<img src="https://github.com/Duttabhi/School-Content-Resource-System/blob/master/Screenshot%20from%202018-06-30%2013-38-03.png" width=500>
+<img src="https://github.com/Duttabhi/School-Content-Resource-System/blob/master/Screenshot%20from%202018-06-30%2013-38-03.png" width=720>
