@@ -27,6 +27,6 @@ There are four types of resources: links & files, tutorial, PhETs(simulations) a
 
 <img src="https://github.com/Duttabhi/School-Content-Resource-System/blob/master/Screenshot%20from%202018-06-30%2013-39-55.png" width=720>
 
-<img src="https://github.com/Duttabhi/School-Content-Resource-System/blob/master/Screenshot%20from%202018-06-30%2013-43-59.png" width=720>
+<img src="https://github.com/Duttabhi/School-Content-Resource-System/blob/master/Screenshot%20from%202018-06-30%2013-43-59.png" width=450>
 
 <img src="https://github.com/Duttabhi/School-Content-Resource-System/blob/master/Screenshot%20from%202018-06-30%2013-44-32.png" width=720>
