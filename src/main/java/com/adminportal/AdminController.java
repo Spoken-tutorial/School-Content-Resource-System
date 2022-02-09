@@ -53,6 +53,7 @@ import com.adminportal.content.ConceptMap;
 import com.adminportal.content.ContactForm;
 import com.adminportal.content.DocumentExternal;
 import com.adminportal.content.Events;
+import com.adminportal.content.Jmol;
 import com.adminportal.content.LessonPlan;
 import com.adminportal.content.Phets;
 import com.adminportal.content.QuizQuestion;
@@ -71,6 +72,7 @@ import com.adminportal.service.ConceptMapService;
 import com.adminportal.service.ContactFormService;
 import com.adminportal.service.DocumentExternalService;
 import com.adminportal.service.EventService;
+import com.adminportal.service.JmolService;
 import com.adminportal.service.LessonPlanService;
 import com.adminportal.service.PhetsService;
 import com.adminportal.service.QuizQuestionService;
@@ -168,6 +170,9 @@ public class AdminController {
 	
 	@Autowired
 	private ContactFormService contactService;
+	
+	@Autowired
+	private JmolService jmolService;
 	
 	@Autowired
 	private Environment env;
@@ -2050,50 +2055,31 @@ public class AdminController {
 	 */
 	@RequestMapping(value="/admin/addView/addTutorial",method = RequestMethod.GET)
 	public ModelAndView addTutorialGet(Principal principal,ModelAndView mv) {
-		
-		
 		User localUser=userService.findByUsername(principal.getName());
-		
 		mv.addObject("LoggedUser",localUser);
-		
 		ArrayList<Class> classExist=(ArrayList<Class>) classService.findAll();		// fetching out the available list of class from database.
-
 		mv.addObject("classExist", classExist);										// setting variable for view for displaying purpose
 		mv.addObject("viewActive","active");
-		
 		List<Tutorial> tempTutorial=tutorialService.getAllTutorial();
-		
 		List<TutorialList> tutorialListData=new ArrayList<TutorialList>();
-		
-		
 		for(Tutorial localTemp:tempTutorial) {
-			
 			try {
 				String url="https://spoken-tutorial.org/api/get_tutorialdetails/"+localTemp.getStVideoId()+"/";
 				RestTemplate restTemp=new RestTemplate();
 				TutorialList localTutorial=restTemp.getForObject(url, TutorialList.class);
-				
 				localTutorial.setTutorialId(localTemp.getTutorialId());
 				localTutorial.setTopicNAme(localTemp.getTopic().getTopicName());
 				localTutorial.setContributedBy(localTemp.getUser().getFname());
 				localTutorial.setStatus(localTemp.getStatus());
 				System.out.println(localTutorial.getOutline());
-				
 				tutorialListData.add(localTutorial);
 			} catch (RestClientException e) {
-				
 				e.printStackTrace();
 			}
 		}
-		
-	
-		
 		mv.addObject("Tutorials", tutorialListData);
-		
-		
 		mv.setViewName("addTutorial");												// setting view name
 		return mv;
-		
 	}
 	
 	/**
@@ -2715,5 +2701,96 @@ public class AdminController {
 		
 	}
 	
+	@RequestMapping(value="/admin/addView/addJmol",method = RequestMethod.GET)
+	public ModelAndView addJmol(Principal principal,ModelAndView mv) {
+	
+		User localUser=userService.findByUsername(principal.getName());
+		
+		mv.addObject("LoggedUser",localUser);
+		
+		ArrayList<Class> classExist=(ArrayList<Class>) classService.findAll();	// fetching out the available list of class from database.
+
+		mv.addObject("classExist", classExist);									// setting variable for view for displaying purpose
+		
+		List<DocumentExternal> documentListTemp=documentService.findAll();
+		List<DocumentExternal> documentList=new ArrayList<DocumentExternal>();
+		for(DocumentExternal temp:documentListTemp) {
+			if(temp.getAcceptedByAdmin()==1) {
+				documentList.add(temp);
+			}
+		}
+		
+		mv.addObject("Document",documentList);
+		
+		mv.setViewName("addJmol");											// setting view name
+
+		mv.addObject("viewActive","active");
+		return mv;
+		
+	}
+	
+	@RequestMapping(value="/admin/addView/addJmolProperty",method = RequestMethod.GET)
+	public ModelAndView addJmolProperty(Principal principal,ModelAndView mv) {
+		User localUser=userService.findByUsername(principal.getName());
+		mv.addObject("LoggedUser",localUser);
+		List<Jmol> jmols = jmolService.findAll();
+		mv.addObject("jmols",jmols);
+		
+//		ArrayList<Class> classExist=(ArrayList<Class>) classService.findAll();		// fetching out the available list of class from database.
+//		mv.addObject("classExist", classExist);										// setting variable for view for displaying purpose
+		mv.addObject("viewActive","active");
+//		List<Tutorial> tempTutorial=tutorialService.getAllTutorial();
+//		List<TutorialList> tutorialListData=new ArrayList<TutorialList>();
+//		for(Tutorial localTemp:tempTutorial) {
+//			try {
+//				String url="https://spoken-tutorial.org/api/get_tutorialdetails/"+localTemp.getStVideoId()+"/";
+//				RestTemplate restTemp=new RestTemplate();
+//				TutorialList localTutorial=restTemp.getForObject(url, TutorialList.class);
+//				localTutorial.setTutorialId(localTemp.getTutorialId());
+//				localTutorial.setTopicNAme(localTemp.getTopic().getTopicName());
+//				localTutorial.setContributedBy(localTemp.getUser().getFname());
+//				localTutorial.setStatus(localTemp.getStatus());
+//				System.out.println(localTutorial.getOutline());
+//				tutorialListData.add(localTutorial);
+//			} catch (RestClientException e) {
+//				e.printStackTrace();
+//			}
+//		}
+//		mv.addObject("Tutorials", tutorialListData);
+		mv.setViewName("addJmolProperty");												// setting view name
+		return mv;
+	}
+	
+	@RequestMapping(value="/admin/addView/addConformation",method = RequestMethod.GET)
+	public ModelAndView addConformation(Principal principal,ModelAndView mv) {
+		User localUser=userService.findByUsername(principal.getName());
+		mv.addObject("LoggedUser",localUser);
+		List<Jmol> jmols = jmolService.findAll();
+		mv.addObject("jmols",jmols);
+		
+//		ArrayList<Class> classExist=(ArrayList<Class>) classService.findAll();		// fetching out the available list of class from database.
+//		mv.addObject("classExist", classExist);										// setting variable for view for displaying purpose
+		mv.addObject("viewActive","active");
+//		List<Tutorial> tempTutorial=tutorialService.getAllTutorial();
+//		List<TutorialList> tutorialListData=new ArrayList<TutorialList>();
+//		for(Tutorial localTemp:tempTutorial) {
+//			try {
+//				String url="https://spoken-tutorial.org/api/get_tutorialdetails/"+localTemp.getStVideoId()+"/";
+//				RestTemplate restTemp=new RestTemplate();
+//				TutorialList localTutorial=restTemp.getForObject(url, TutorialList.class);
+//				localTutorial.setTutorialId(localTemp.getTutorialId());
+//				localTutorial.setTopicNAme(localTemp.getTopic().getTopicName());
+//				localTutorial.setContributedBy(localTemp.getUser().getFname());
+//				localTutorial.setStatus(localTemp.getStatus());
+//				System.out.println(localTutorial.getOutline());
+//				tutorialListData.add(localTutorial);
+//			} catch (RestClientException e) {
+//				e.printStackTrace();
+//			}
+//		}
+//		mv.addObject("Tutorials", tutorialListData);
+		mv.setViewName("addConformation");												// setting view name
+		return mv;
+	}
 
 }

@@ -49,9 +49,12 @@ import com.adminportal.content.Class;
 import com.adminportal.content.Comment;
 import com.adminportal.content.CommentReply;
 import com.adminportal.content.ConceptMap;
+import com.adminportal.content.Conformation;
 import com.adminportal.content.ContactForm;
 import com.adminportal.content.DocumentExternal;
 import com.adminportal.content.Events;
+import com.adminportal.content.Jmol;
+import com.adminportal.content.JmolProperty;
 import com.adminportal.content.LessonPlan;
 import com.adminportal.content.Phets;
 import com.adminportal.content.QuizQuestion;
@@ -74,8 +77,11 @@ import com.adminportal.service.ClassService;
 import com.adminportal.service.CommentReplyService;
 import com.adminportal.service.CommentService;
 import com.adminportal.service.ConceptMapService;
+import com.adminportal.service.ConformationService;
 import com.adminportal.service.DocumentExternalService;
 import com.adminportal.service.EventService;
+import com.adminportal.service.JmolPropertyService;
+import com.adminportal.service.JmolService;
 import com.adminportal.service.LessonPlanService;
 import com.adminportal.service.PhetsService;
 import com.adminportal.service.QuizQuestionService;
@@ -184,6 +190,17 @@ public class HomeControllerRest {
 	
 	@Autowired
 	private Environment env;
+	
+	@Autowired
+	private JmolService jmolService;
+	
+	@Autowired
+	private JmolPropertyService jmolPropService;
+	
+	@Autowired
+	private ConformationService conformationService;
+	
+	public static String jmol_content_type="Jmol";
 	
 	/**
 	 * Get method to Count number of resource added inside a particular topic
@@ -3512,6 +3529,77 @@ public class HomeControllerRest {
 		return "ok";
 	}
 	
+//	@RequestParam("jmolFile") MultipartFile[] uploadPhoto,
+	@PostMapping("/uploadJmol")
+//	public @ResponseBody String uploadJmol(@RequestBody Jmol jmol, Principal principal) throws Exception{
+	public @ResponseBody String uploadJmol(@RequestParam String className,@RequestParam String subjectName,
+			@RequestParam String topicName, Principal principal,
+			@RequestParam String description,@RequestParam String source,@RequestParam String jmolTitle) throws Exception{
+		System.err.println("********************************1");
+		int documentId=jmolService.count()+1;
+		Class localClass=classService.findByClassName(Integer.parseInt(className));									// retrieving class modal
+		Subject localSubject=subjectService.findBysubName(subjectName);								// retrieving subject modal
+		SubjectClassMapping localSubjectClass=subjectClassService.findBysubAndstandard( localClass,localSubject); // retrieving subject class mapping from class and subject
+		Topic localTopic=topicService.findBysubjectClassMappingAndtopicName(localSubjectClass, topicName);	// retrieving topic from subject class mapping
+		User usr=userService.findByUsername(principal.getName());
+		Jmol jmol = new Jmol(documentId, jmol_content_type, ServiceUtility.getCurrentTime(), ServiceUtility.getCurrentTime(), "url",description, 1,1,"null", localTopic, usr,source,jmolTitle);
+		jmolService.save(jmol);
+
+		
+//		ServiceUtility.createFolder(env.getProperty("spring.applicationexternalPath.name")+"Media/User/"+principal.getName()+"/Profile");
+//		
+//		String createFolder=env.getProperty("spring.applicationexternalPath.name")+"Media/User/"+principal.getName()+"/Profile";
+//		
+//		String documentLocal=ServiceUtility.uploadFile(uploadPhoto, createFolder);
+//		
+//		int indexToStart=documentLocal.indexOf("Media");
+//		
+//		String document=documentLocal.substring(indexToStart, documentLocal.length());
+//		
+//		User localUser=userService.findByUsername(principal.getName());
+//		localUser.setProfilePic(document);
+//		
+//		userService.save(localUser);
+		
+		
+		return "ok";
+	}
+
+	@PostMapping("/addJmolScripts")
+	public @ResponseBody String addJmolScripts(@RequestParam String jmolId,@RequestParam String groupName,
+			@RequestParam String labels,@RequestParam String scripts, Principal principal
+			) throws Exception{
+		System.err.println("********************************1");
+		System.err.println(jmolId);
+		System.err.println(groupName);
+		System.err.println(labels);
+		System.err.println(scripts);
+		String[] arrOfLabels = labels.split(",");
+		String[] arrOfScripts = scripts.split(",");
+		for (int i = 0; i < 4; i++) {
+			int id = jmolPropService.count()+1;
+			ServiceUtility.getCurrentTime();
+			User usr=userService.findByUsername(principal.getName());
+			Jmol jmol = jmolService.findById(Integer.parseInt(jmolId));
+			JmolProperty jp = new JmolProperty(id, groupName, arrOfLabels[i], arrOfScripts[i], true, ServiceUtility.getCurrentTime(), usr, jmol);
+			jmolPropService.save(jp);
+			}
+		return "ok";
+	}
+	
+	@PostMapping("/addJmolConformation")
+	public @ResponseBody String addJmolConformation(@RequestParam String jmolId,@RequestParam String conformationName,
+			@RequestParam String source,Principal principal
+			) throws Exception{
+		System.err.println("********************************1");
+		System.err.println(jmolId);
+		User usr=userService.findByUsername(principal.getName());
+		Jmol jmol = jmolService.findById(Integer.parseInt(jmolId));
+		int id = conformationService.countRows()+1;
+		Conformation con = new Conformation(id, conformationName, true, ServiceUtility.getCurrentTime(), usr, jmol);
+		conformationService.save(con);
+		return "ok";
+	}
 	
 	
 	

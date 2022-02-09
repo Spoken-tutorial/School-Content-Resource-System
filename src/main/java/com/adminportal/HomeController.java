@@ -20,6 +20,7 @@ import java.security.Principal;
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -66,6 +67,7 @@ import com.adminportal.content.Class;
 import com.adminportal.content.ConceptMap;
 import com.adminportal.content.DocumentExternal;
 import com.adminportal.content.Events;
+import com.adminportal.content.Jmol;
 import com.adminportal.content.LessonPlan;
 import com.adminportal.content.Phets;
 import com.adminportal.content.QuizQuestion;
@@ -84,6 +86,7 @@ import com.adminportal.service.ClassService;
 import com.adminportal.service.ConceptMapService;
 import com.adminportal.service.DocumentExternalService;
 import com.adminportal.service.EventService;
+import com.adminportal.service.JmolService;
 import com.adminportal.service.LessonPlanService;
 import com.adminportal.service.PhetsService;
 import com.adminportal.service.QuizQuestionService;
@@ -179,6 +182,9 @@ public class HomeController {
 
 	@Autowired
 	private EventsRepository evenRepo;
+	
+	@Autowired
+	private JmolService jmolService;
 	
 	/*
 	 * @Autowired HttpServletRequest req;
@@ -1373,6 +1379,24 @@ public class HomeController {
 		mv.setViewName("Courses");
 		return mv;
 	}
+	
+//	@RequestMapping(path = "/jmols/", method = RequestMethod.GET)
+////	public ModelAndView jmol(@PathVariable("subName") String SubName, ModelAndView mv,Principal principal) {
+//	public ModelAndView jmol(ModelAndView mv,Principal principal) {
+//		List<Jmol> jmols = jmolService.findAll();
+//		System.err.println("*******************************");
+//		System.err.println(jmols);
+//		System.err.println("*******************************");
+//		Topic topic = topicService.findById(1);
+//		User user = userService.findById(1);
+//		Jmol j = new Jmol(1, "Jmol", Timestamp.from(Instant.now()), Timestamp.from(Instant.now()), "address",
+//				 "descr", 1,1, "remarks", topic, user);
+//		
+//		jmolService.addJmol(j);
+//		
+//		mv.setViewName("jmol");
+//		return mv;
+//	}
 	
 	
 	/*--------------------------------------------------------END----------------------------------------------------------------------------------*/

@@ -105,6 +105,9 @@ public class Topic {
 	
 	@OneToMany(mappedBy = "topic",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
 	private Set<ConceptMap> conceptMap=new HashSet<ConceptMap>();
+	
+//	@OneToMany(mappedBy = "topic",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+//	private Set<Jmol> jmol=new HashSet<Jmol>();
 
 	public int getTopicId() {
 		return topicId;
@@ -241,6 +244,14 @@ public class Topic {
 	public void setUserId(User userId) {
 		this.userId = userId;
 	}
+
+//	public Set<Jmol> getJmol() {
+//		return jmol;
+//	}
+//
+//	public void setJmol(Set<Jmol> jmol) {
+//		this.jmol = jmol;
+//	}
 	
 	
 	
