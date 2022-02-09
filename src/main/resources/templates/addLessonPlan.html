@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1000/xhtml" xmlns:sec="http://www.w3.org/1000/xhtml">
+
+<head>
+    <div th:replace="common/header :: common-header-Dashboard"></div>
+	<title>Add Lesson Plan</title>
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="sidebar" th:data-image="@{/img/sidebar-5.jpg}">
+            <!--
+        Tip 1: You can change the color of the sidebar using: data-color="purple | blue | green | orange | red"
+
+        Tip 2: you can also add an image using data-image tag
+    -->
+            <div class="sidebar-wrapper">
+                <div class="logo">
+                    <a th:href="@{/}" class="simple-text">
+                        School Connex
+                    </a>
+                </div>
+                  <ul class="nav">
+                    <li>
+                        <a class="nav-link" th:href="@{/dashBoard}">
+                            <i class="nc-icon nc-circle-09"></i>
+                            <p>User Profile</p>
+                        </a>
+                    </li>
+                    <div sec:authorize="hasAuthority('Teacher')">
+                    <li>
+                        <a class="nav-link" th:href="@{/conConceptMap}">
+                            <i class="nc-icon nc-paper-2"></i>
+                            <p>Concepts-Map</p>
+                        </a>
+                    </li>
+                    </div>
+                    <div sec:authorize="hasAuthority('Teacher')">
+                    <li >
+                        <a class="nav-link" th:href="@{/conPhet}">
+                            <i class="nc-icon nc-paper-2"></i>
+                            <p>Phets</p>
+                        </a>
+                    </li>
+                    </div>
+                    <div sec:authorize="hasAuthority('Teacher')">
+                    <li>
+                        <a class="nav-link" th:href="@{/conArticle}">
+                            <i class="nc-icon nc-paper-2"></i>
+                            <p>Article</p>
+                        </a>
+                    </li>
+                    </div>
+                    <div sec:authorize="hasAuthority('Teacher')">
+                    <li>
+                        <a class="nav-link" th:href="@{/conLessonPlan}">
+                            <i class="nc-icon nc-paper-2"></i>
+                            <p>Lesson Plan</p>
+                        </a>
+                    </li>
+                    </div>
+                    <div sec:authorize="hasAuthority('Teacher')">
+                    <li>
+                        <a class="nav-link" th:href="@{/conDocument}">
+                            <i class="nc-icon nc-paper-2"></i>
+                            <p>Document</p>
+                        </a>
+                    </li>
+                    </div>
+                    <div sec:authorize="hasAuthority('Teacher')">
+                    <li>
+                        <a class="nav-link" th:href="@{/conVideo}">
+                            <i class="nc-icon nc-paper-2"></i>
+                            <p>Video</p>
+                        </a>
+                    </li>
+                    </div>
+                    <div sec:authorize="hasAuthority('Teacher')">
+                    <li>
+                        <a class="nav-link" th:href="@{/conQuiz}">
+                            <i class="nc-icon nc-paper-2"></i>
+                            <p>Quiz</p>
+                        </a>
+                    </li>
+                    </div>
+                    <div sec:authorize="hasAuthority('Teacher')">
+                    <li>
+                        <a class="nav-link" th:href="@{/conView}">
+                            <i class="nc-icon nc-bell-55"></i>
+                            <p>Status</p>
+                        </a>
+                    </li>
+                    </div>
+					<div sec:authorize="hasAuthority('Admin')">
+                    <li class="nav-item active">
+                        <a class="nav-link" th:href="@{/admin/addView}">
+                            <i class="nc-icon nc-paper-2"></i>
+                            <p>Add/View Components</p>
+                        </a>
+                    </li>
+                    </div>
+                     <div sec:authorize="hasAuthority('Admin')">
+                    <li>
+                        <a class="nav-link" th:href="@{/admin/approve}">
+                            <i class="nc-icon nc-paper-2"></i>
+                            <p>Approve Components</p>
+                        </a>
+                    </li>
+                    </div>
+                </ul>
+            </div>
+        </div>
+        <div class="main-panel">
+            <!-- Navbar -->
+            <nav class="navbar navbar-expand-lg " color-on-scroll="500">
+                <div class="container-fluid">
+                    <span th:text="${LoggedUser.getFname()}"></span>
+                    <button href="" class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-bar burger-lines"></span>
+                        <span class="navbar-toggler-bar burger-lines"></span>
+                        <span class="navbar-toggler-bar burger-lines"></span>
+                    </button>
+                    <div class="collapse navbar-collapse justify-content-end" id="navigation">
+
+                        <ul class="navbar-nav ml-auto">
+
+
+                            <li class="nav-item">
+                                <a class="nav-link" th:href="@{/logout}">
+                                    <span class="no-icon">Log out</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <!-- End Navbar -->
+            <div class="content">
+                <div class="container-fluid">
+                    <div class="spk-card-body spk-tab">
+                    	<ul class="nav nav-tabs" id="myTab" role="tablist">
+							<li class="nav-item"><a
+								th:class="${viewActive} ? 'nav-link active' : 'nav-link'"
+								id="home-tab" data-toggle="tab" href="#home" role="tab"
+								aria-controls="home" aria-selected="true">View Lesson Plan</a></li>
+							<li class="nav-item"><a
+								th:class="${addActive} ? 'nav-link active' : 'nav-link'"
+								id="profile-tab" data-toggle="tab" href="#profile" role="tab"
+								aria-controls="profile" aria-selected="false">Add Lesson Plan</a></li>
+
+						</ul>
+						
+                        <div class="tab-content" id="myTabContent">
+							<div th:class="${viewActive} ? 'tab-pane fade show active' : 'tab-pane fade show'"
+								id="home" role="tabpanel" aria-labelledby="home-tab"> 
+								
+								   
+                                <div class="card-header">
+                                    <!-- <h4 class="card-title">Available Lesson Plan</h4> -->
+                                    <div class="status" th:text="${status}"></div>
+                                </div>
+                                <div class="card-body">
+                                	<form th:action="@{deleteLesson}" method="post">
+										<div class="table-responsive">
+											<table id="dtBasicExample" class="table table-striped table-sm"
+												cellspacing="0" width="100%">
+						
+												<thead class="">
+													<tr>
+														<th data-orderable="false">#</th>
+														<th>Topic Name</th>
+														<th>Date Added</th>
+														<th>Link</th>
+														<th data-orderable="false">Status</th>
+														<th>Contributed by</th>
+														<th data-orderable="false">Operation</th>
+													</tr>
+												</thead>
+						
+												<tbody>
+						
+													<span th:each="lesson:${Lesson}">
+														<tr class="clickable-row">
+															<th scope="row"><input type="radio"
+																th:value="${lesson.getLessonPlanId()}"
+																th:id="${lesson.getLessonPlanId()}" name="radioLesson"
+																onchange="radioCall()" /></th>
+															<td><span th:text="${lesson.getTopic().getTopicName()}"></span></td>
+															<td><span th:text="${#dates.format(lesson.getDateAdded(), 'dd MMM , yyyy')}"></span></td>
+															<td><a th:href="@{/files/}+@{${lesson.getLessonPlan()}}"
+																class="pdfclass" target="_blank"><i class="fas fa-external-link-alt"></i></a></td>
+						
+															<td><span th:if="${lesson.isStatus()==1}"><div
+																		id="true" /></span> <span th:unless="${lesson.isStatus()==1}"><div
+																		id="false" /></span></td>
+						
+															<td><a href=""><span
+																	th:text="${lesson.getUser().getFname()}"></span></a></td>
+															<td><a class="btn spk-btn-sm detailLesson"
+																th:value="${lesson.getLessonPlanId()}" id="detailLesson">Update</a>
+						
+															</td>
+						
+														</tr>
+													</span>
+						
+												</tbody>
+						
+											</table>
+						
+										</div>
+						
+										<div class="container">
+											<center>
+						
+						
+												<button class="btn spk-btn-hide" id="disableLesson" disabled onclick="return confirm('Are you sure you want to Disable it?')">Hide</button>
+						
+												<button class="btn spk-btn" id="enableLesson" disabled onclick="return confirm('Are you sure you want to Show this?')">Show</button>
+						
+						
+											</center>
+						
+						
+										</div>
+						
+									</form>
+
+								</div>
+                                
+                                    
+                            </div>
+                        
+                        <div th:class="${addActive} ? 'tab-pane fade show active' : 'tab-pane fade show'"
+								id="profile" role="tabpanel" aria-labelledby="profile-tab">
+							
+							<div class="card-header">
+                                   <!--  <h4 class="card-title">Add New Lesson Plan</h4> -->
+                                    <div class="status" th:text="${statusAdd}"></div>
+									<div class="error" th:text="${failure}"></div>
+									<div class="error" th:text="${fileError}"></div>
+                            </div>
+                            <div class="card-body">
+			                   <form th:action="@{addLessonPlan}" method="post" enctype="multipart/form-data">
+                                        <div class="row">
+                                            <div class="col-md-4 ">
+                                                <div class="form-group">
+<!--                                                    <label>Company (disabled)</label>-->
+                                                    <select class="form-control" name="classSelected"
+														id="classSelected">
+														<option>Select Class</option>
+														<span th:each="classValue: ${classExist}">
+															<option><span th:text="${classValue.getClassName()}"></span></option>
+													</span>
+													</select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+<!--                                                    <label>Username</label>-->
+                                                    <select class="form-control" name="subjectSelected" id="subject" disabled>
+                                                        <option value="0">Select Subject</option>
+														<options items="${cities}" itemValue="id" itemLabel="name" />
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+<!--                                                    <label for="exampleInputEmail1">Email address</label>-->
+                                                    <select class="form-control"  name="topicSelected" id="topic" disabled>
+                                                        <option value="0">Select Topic</option>
+														<options items="${cities}" itemValue="id" itemLabel="name" />
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                         <div class="form-group row">
+										    <label for="lesson" class="col-sm-2 col-form-label">Upload Lesson Plan</label>
+										    <div class="col-sm-4">
+										      <input type="file" class="form-control" id="lesson" name="lesson" accept="application/pdf" title="please add only Pdf file" required disabled>
+										    </div>
+										  </div>
+                                          <div class="row">
+                                          <div class="col-sm-12">
+                                                <div class="instr">
+													<a href="#" class="show_hide" data-content="toggle-text">Instructions?</a>
+                                                    <div class="contentInstruction" style="color:red">
+                                                    	<p> * File must be pdf format only </p>
+                                                    	<p> * File must be less than 10 MB in size </p>
+                                                    </div>
+											</div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="form-group row terms-c">
+                                        	<div class="col-sm-12">
+                                        	<hr>
+                                        	<div class="pl15"><input class="form-check-input" type="checkbox" value="" required >
+                                        	
+                                        	<a href="" data-toggle="modal" data-target="#exampleModalScrollable">Agree to terms and conditions</a>
+                                        	</div></div>
+											</div>
+                                        
+                                        <button type="submit"  class="btn spk-btn btn-fill pull-right upload-submit" disabled>Upload</button>
+                                        <div class="clearfix"></div>
+                                    </form>
+                            
+                            </div>
+								
+						</div>
+                        
+                             
+                             </div>
+                         </div>
+                     </div>
+                 
+                </div>
+            
+            <footer class="footer">
+                <div class="container-fluid">
+                    <nav>
+                        <p class="copyright text-center">
+                            ©
+                            <script>
+                                document.write(new Date().getFullYear())
+                            </script>
+                            Spoken Tutorial
+                        </p>
+                    </nav>
+                </div>
+            </footer>
+        </div>
+    </div>
+    
+    
+        <!--  COMMON CODE FOR LIBRARY ADDED -->
+	<div th:replace="common/header :: body-bottom-scripts-Dashboard"></div>
+	<script th:inline="javascript">
+    
+		var projectPath='[(@{/})]';
+		
+	</script>
+	
+	<div th:replace="common/header :: Terms-condition-Modal"></div>
+
+
+	<!-- Modal for updating the data-->
+
+	<div class="modal fade" id="LessonPlanModal" tabindex="-1"
+		role="dialog" aria-labelledby="exampleModalCenterTitle"
+		aria-hidden="true">
+		<div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content">
+				<form action="" method="post" enctype="multipart/form-data"
+					id="uploadUpdateLesson">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalCenterTitle">Update
+							Document</h5>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<div id="SuccessLesson"
+							style="display: none; color: green; font-size: 18px; text-align: center">Data
+							Updated Successfully</div>
+						<div id="FailureLesson"
+							style="display: none; color: red; font-size: 18px; text-align: center">Please
+							Try Again</div>
+						<div id="invalid-dataLesson"
+							style="display: none; color: red; font-size: 18px; text-align: center">File
+							must be PDF</div>
+
+						<div class="row">
+
+							<div class="col-sm-6">
+								<label>Document</label> <input type="hidden" id="lessonId"
+									name="lessonId" value="">
+							</div>
+							<div class="col-sm-6">
+								<input type="file" class="form-control-file" id="lessonPlan"
+									name="lessonPlan" accept="pdf/*" required />
+
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button class="btn spk-btn" id="updateLesson" value="">Update</button>
+						</div>
+
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	
+</body>
+</html>

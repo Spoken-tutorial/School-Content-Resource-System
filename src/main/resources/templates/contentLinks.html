@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.w3.org/1000/xhtml" xmlns:sec="http://www.w3.org/1000/xhtml">
+
+<head>
+	  <div th:replace="common/header :: common-header-Dashboard"></div>
+	  <title>Link</title>
+   
+</head>
+
+<body>
+    <div class="wrapper res-wrapper">
+        <div class="sidebar" th:data-image="@{/img/sidebar-5.jpg}">
+            <!--
+        Tip 1: You can change the color of the sidebar using: data-color="purple | blue | green | orange | red"
+
+        Tip 2: you can also add an image using data-image tag
+    -->
+            <div class="sidebar-wrapper">
+                <div class="logo">
+                    <a class="simple-text">
+                        Resources
+                    </a>
+                </div>
+                <ul class="nav">
+                   
+                    <li  >
+                        <a class="nav-link" th:href="@{'/contentTutorial/'+ ${TopicSelected.getTopicId()}}">
+                            <span class="r-icon"><i class="far fa-file-video"></i></span>
+                            <p>Spoken Tutorial</p>
+                        </a>
+                    </li>
+                     <li>
+                        <a class="nav-link" th:href="@{'/contentConcept/'+ ${TopicSelected.getTopicId()}}">
+                           <span class="r-icon"><i class="fas fa-book-open"></i></span>
+                            <p>Concept-Map</p>
+                        </a>
+                    </li>
+                     <li>
+                        <a class="nav-link" th:href="@{'/contentLesson/'+ ${TopicSelected.getTopicId()}}">
+                            <span class="r-icon"><i class="far fa-list-alt"></i></span>
+                            <p>Lesson Plan</p>
+                        </a>
+                    </li>
+                     <li class="nav-item active">
+                        <a class="nav-link" th:href="@{'/contentLink/'+ ${TopicSelected.getTopicId()}}">
+                            <span class="r-icon"><i class="fas fa-link"></i></span>
+                            <p>Links</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="nav-link" th:href="@{'/contentPhet/'+ ${TopicSelected.getTopicId()}}">
+                            <span class="r-icon"><i class="fas fa-atom"></i></span>
+                            <p>Phets</p>
+                        </a>
+                    </li>
+                   
+                    <li>
+                        <a class="nav-link" th:href="@{'/contentQuiz/'+ ${TopicSelected.getTopicId()}}">
+                            <span class="r-icon"><i class="far fa-clipboard"></i></span>
+                            <p>Quiz</p>
+                        </a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        <div class="main-panel">
+            <!-- Navbar -->
+             <nav class="navbar navbar-expand-lg res-header-nav" color-on-scroll="500">
+                <div class="container-fluid">
+                    <span></span>
+                    <button href="" class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-bar burger-lines"></span>
+                        <span class="navbar-toggler-bar burger-lines"></span>
+                        <span class="navbar-toggler-bar burger-lines"></span>
+                    </button>
+                    <div class="collapse navbar-collapse justify-content-end" id="navigation">
+
+                        <ul class="nav navbar-nav mr-auto">
+                            <li class="nav-item">
+                                
+										<div class="container res-info" style="margin-top:10px;display:flex;">
+								
+											<span style="display: flex">
+												
+													<a th:href="@{'/topicOnClass/'+ ${classSelected}}"><span th:text="'Class '+${classSelected}"></span></a>
+										
+									<span><i class="fas fa-chevron-right"></i></span>
+												
+													<a th:href="@{'/topicOnSubject/'+ ${subjectSelected}}"><span th:text="${subjectSelected}"></span></a>
+												<span><i class="fas fa-chevron-right"></i></span>
+												
+												<span class="res-topic" th:text="${TopicSelected.getTopicName()}"></span>
+											
+								
+											</span>
+											
+								
+										</div>
+									
+                            </li>
+                           <!--  <li class="dropdown nav-item">
+                                <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+                                    <i class="nc-icon nc-planet"></i>
+                                    <span class="notification">5</span>
+                                    <span class="d-lg-none">Notification</span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <a class="dropdown-item" href="#">Notification 1</a>
+                                    <a class="dropdown-item" href="#">Notification 2</a>
+                                    <a class="dropdown-item" href="#">Notification 3</a>
+                                    <a class="dropdown-item" href="#">Notification 4</a>
+                                    <a class="dropdown-item" href="#">Another notification</a>
+                                </ul>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">
+                                    <i class="nc-icon nc-zoom-split"></i>
+                                    <span class="d-lg-block">&nbsp;Search</span>
+                                </a>
+                            </li>  -->
+                        </ul>
+
+                        <ul class="navbar-nav ml-auto">
+							
+                           <!--  <li class="nav-item" style="margin-right:20px">
+                                
+                                    <select id="inputClass" class="browser-default custom-select pad-extra" name="classSelected" style="margin-top:20px">
+
+										<option selected>Select Class</option>
+										<span th:each="classValue: ${classfromDatabase}">
+										<option><span th:text="'Class '+${classValue.getClassName()}"></span></option>
+										</span>
+									</select>
+                               
+                            </li>
+                            
+                           
+                            
+                            <li class="nav-item" style="margin-right:20px">
+                                
+                              <select class="browser-default custom-select pad-extra"
+								name="subjectSelected" id="subjectHome" path="subject" style="margin-top:20px">
+								<option selected>Select Subject</option>
+								<span th:each="subjectValue: ${subjectfromDatabase}">
+									<option><span th:text="${subjectValue.getSubName()}"></span>
+									</option>
+								</span>
+							
+							</select>
+                                
+                            </li> -->
+                              <li class="nav-item">
+                              <a class="navbar-brand" style="color:blue" th:href="@{/}"><span class="fas fa-home"></span></a>
+                                <a class="nav-link" data-toggle="modal" data-target="#frameModalBottom">
+                                    <span class="no-icon">Modify Search ?</span>
+                                </a>
+                            </li>
+		
+                          <!--   <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <span class="no-icon">Dropdown</span>
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                    <a class="dropdown-item" href="#">Action</a>
+                                    <a class="dropdown-item" href="#">Another action</a>
+                                    <a class="dropdown-item" href="#">Something</a>
+                                    <a class="dropdown-item" href="#">Something else here</a>
+                                    <div class="divider"></div>
+                                    <a class="dropdown-item" href="#">Separated link</a>
+                                </div>
+                            </li> -->
+                            <li class="nav-item" sec:authorize="isAnonymous()">
+                                <a class="nav-link" th:href="@{/Login}">
+                                    <span class="no-icon">Login</span>
+                                </a>
+                            </li>
+                            <li class="nav-item" sec:authorize="isAnonymous()">
+                                <a class="nav-link" th:href="@{/Signup}">
+                                    <span class="no-icon">Register</span>
+                                </a>
+                            </li>
+							
+							 <li class="nav-item" sec:authorize="isAuthenticated()">
+                                <a class="nav-link" th:href="@{/dashBoard}">
+                                    <span class="no-icon">DashBoard</span>
+                                </a>
+                            </li>
+                            
+                            <li class="nav-item" sec:authorize="isAuthenticated()">
+                                <a class="nav-link" th:href="@{/logout}">
+                                    <span class="no-icon">Log out</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <!-- End Navbar -->
+            <div class="content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="res-card">
+                                <div class="res-card-header">
+                                <div>
+                                <h3 class="res-topic-card"><span th:text="${TopicSelected.getTopicName()}"></span></h3>
+                                    <h3>Reference Links</h3>
+                                </div>
+                                </div>
+                                <br>
+                                <div >
+                               		<ul class="nav nav-tabs" id="myTab" role="tablist">
+										<li class="nav-item"><a class="nav-link active"
+											id="video-tab" data-toggle="tab" href="#Video" role="tab"
+											aria-controls="home" aria-selected="true"><span><i class="fas fa-video"></i> Videos : <span th:text="${#lists.size(VideoOnTopic)}"></span></span></a></li>
+										<li class="nav-item"><a class="nav-link" id="link-tab"
+											data-toggle="tab" href="#Links" role="tab"
+											aria-controls="profile" aria-selected="false"><span><i class="fas fa-link"></i> Links : <span th:text="${#lists.size(ArticleOnTopic)}"></span></span></a></li>
+										<li class="nav-item"><a class="nav-link" id="document-tab"
+											data-toggle="tab" href="#Document" role="tab"
+											aria-controls="contact" aria-selected="false"><span><i class="far fa-file-alt"></i> Documents : <span th:text="${#lists.size(DocumentOnTopic)}"></span></span></a></li>
+									</ul>
+									<div class="tab-content" id="myTabContent">
+										<div class="tab-pane fade show active" id="Video" role="tabpanel"
+											aria-labelledby="Video-tab">
+			
+											<div class="clearfix"></div>
+											<div class="row link-video" th:each="video:${VideoOnTopic}">
+											<div class="col-md-4">
+											<div class="embed-responsive embed-responsive-16by9">
+														
+														<div th:if="${#strings.startsWith(video.getUrl(),'Media')}">
+																	<video width="250" height="150" controls>
+																		  <source th:src="@{/files/}+@{${video.getUrl()}}" type="video/mp4"/>
+																	 </video>
+																
+														</div>
+														<div th:unless="${#strings.startsWith(video.getUrl(),'Media')}">
+																
+															<iframe class="embed-responsive-item"
+															th:src="${video.getUrl()}" frameborder="0"
+															allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+															allowfullscreen></iframe>
+																
+														</div>
+														
+														
+													</div>
+											</div>
+											<div class="col-md-8 vid-content">
+											<p th:text="${video.getDescription()}"></p>
+											<p class="text-muted vid-src">Source : <span th:text="${video.getSource()}"></span></p>
+											</div>
+											</div>
+			
+											<!-- <span th:if="${VideoError}">
+												<span style="text-align: center; color: red;"
+													th:text="${VideoError}"></span>
+											</span> -->
+			
+			
+										</div>
+			
+			
+										<div class="tab-pane fade" id="Links" role="tabpanel"
+											aria-labelledby="Links-tab">
+			
+											<div class="row link-item" th:each="link:${ArticleOnTopic}">
+											<div class="col-md-2 heading"><span> Description : </span></div>
+											<div class="col-md-10"><span th:text="${link.getDescription()}"></span></div>
+											<div class="col-md-2 heading"><span> URL : </span></div>
+											<div class="col-md-10 link-txt"><a th:href="${link.getUrl()}" target="_blank"><span class="text-muted" th:text="${link.getUrl()}"></span></a></div>
+											<div class="col-md-2 heading"><span> Source : </span></div>
+											<div class="col-md-10"><span class="text-muted" th:text="${link.getSource()}"></span></div>
+											</div>
+			
+											<!-- <span th:if="${ArticleError}">
+												<span style="text-align: center; color: red;"
+													th:text="${ArticleError}" /></span>
+											</span> -->
+			
+			
+			
+			
+										</div>
+										<div class="tab-pane fade" id="Document" role="tabpanel" aria-labelledby="Document-tab">
+										<div th:each="document:${DocumentOnTopic}" class="doc-item">
+										<div class="row doc-desc" >
+										<div class="col-md-12">
+										<p><i class="far fa-list-alt"></i><span th:text="${document.getDescription()}"></span></p>
+										</div>
+										</div>
+										<div class="row">
+										<div class="col-sm-4">
+										<p class="text-muted"> Source : <span th:text="${document.getSource()}"></span></p>
+										</div>
+										<div class="col-sm-8 doc-link">
+										<p> <a th:href="@{/files/}+@{${document.getUrl()}}" target="_blank"><i class="fas fa-link"></i> Check Out</a></p>
+										</div>
+										</div>
+										</div>
+											<!-- <span th:if="${DocumentError}">
+												<span style="text-align: center; color: red;"
+													th:text="${DocumentError}"></span>
+											</span> -->
+			
+										</div>
+									</div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                       
+                    </div>
+                </div>
+            </div>
+            <footer class="footer">
+                <div class="container-fluid">
+                    <nav>
+
+                        <p class="copyright text-center">
+                            ©
+                            <script>
+                                document.write(new Date().getFullYear())
+                            </script>
+                            Spoken Tutorial
+                        </p>
+                    </nav>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+        <!--  COMMON CODE FOR LIBRARY ADDED -->
+	<div th:replace="common/header :: body-bottom-scripts-Dashboard"></div>
+	<script th:inline="javascript">
+    
+		var projectPath='[(@{/})]';
+		
+	</script>
+	
+	<!-- Frame Modal Bottom -->
+<div class="modal fade bottom" id="frameModalBottom" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
+
+  <!-- Add class .modal-frame and then add class .modal-bottom (or other classes from list above) to set a position to the modal -->
+  <div class="modal-dialog modal-frame modal-top" role="document">
+
+
+    <div class="modal-content">
+      <div class="modal-body">
+         <div class="row d-flex justify-content-center align-items-center">
+			
+			
+			<div class="container" style="text-align:center">
+				<form th:action="@{/courses}" method="get"><form>
+				<div class="row" style="padding-left:100px;padding-right:100px;">
+					<div class="col-sm-12 col-md-4">
+						 <select id="inputClass" class="browser-default custom-select pad-extra" name="classSelected" style="margin-top:10px">
+
+										<option selected>Select Class</option>
+										<span th:each="classValue: ${classfromDatabase}">
+										<option><span th:text="'Class '+${classValue.getClassName()}"></span></option>
+										</span>
+						</select>
+					</div>
+					<div class="col-sm-12 col-md-4">
+						<select class="browser-default custom-select pad-extra"
+								name="subjectSelected" id="subjectHome" path="subject" style="margin-top:10px">
+								<option selected>Select Subject</option>
+								<span th:each="subjectValue: ${subjectfromDatabase}">
+									<option><span th:text="${subjectValue.getSubName()}"></span>
+									</option>
+								</span>
+							
+						</select>
+					</div>
+					<div class="col-sm-12 col-md-4">
+						<select class="browser-default custom-select" name="topicSelected" id="topicSelected" style="margin-top:10px">
+  							<option value="Select Topic">Select Topic</option>
+						</select>
+					</div>
+					</div>
+				<div class="row" style="padding-top:10px;">
+					<div class="col-sm-6 col-md-6" >
+						 <button type="submit" class="btn btn-primary" style="float:right">Submit</button>
+					</div>
+					
+					<div class="col-sm-6 col-md-6">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal" style="float:left">Close</button>
+					</div>
+				</div>
+				</form>				
+			</div>
+		 
+          
+          
+         
+        </div> 
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Frame Modal Bottom -->
+	
+
+</body>
+
+</html>

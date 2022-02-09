@@ -1,0 +1,224 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1000/xhtml" xmlns:sec="http://www.w3.org/1000/xhtml">
+
+<head>
+    <div th:replace="common/header :: common-header-Dashboard"></div>
+	<title>Add Class</title>
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="sidebar" th:data-image="@{/img/sidebar-5.jpg}">
+            <!--
+        Tip 1: You can change the color of the sidebar using: data-color="purple | blue | green | orange | red"
+
+        Tip 2: you can also add an image using data-image tag
+    -->
+            <div class="sidebar-wrapper">
+                <div class="logo">
+                    <a th:href="@{/}" class="simple-text">
+                        School Connex
+                    </a>
+                </div>
+                  <ul class="nav">
+                    <li>
+                        <a class="nav-link" th:href="@{/dashBoard}">
+                            <i class="nc-icon nc-circle-09"></i>
+                            <p>User Profile</p>
+                        </a>
+                    </li>
+                    <div sec:authorize="hasAuthority('Teacher')">
+                    <li>
+                        <a class="nav-link" th:href="@{/conConceptMap}">
+                            <i class="nc-icon nc-paper-2"></i>
+                            <p>Concepts-Map</p>
+                        </a>
+                    </li>
+                    </div>
+                    <div sec:authorize="hasAuthority('Teacher')">
+                    <li>
+                        <a class="nav-link" th:href="@{/conPhet}">
+                            <i class="nc-icon nc-paper-2"></i>
+                            <p>Phets</p>
+                        </a>
+                    </li>
+                    </div>
+                    <div sec:authorize="hasAuthority('Teacher')">
+                    <li>
+                        <a class="nav-link" th:href="@{/conArticle}">
+                            <i class="nc-icon nc-paper-2"></i>
+                            <p>Article</p>
+                        </a>
+                    </li>
+                    </div>
+                    <div sec:authorize="hasAuthority('Teacher')">
+                    <li>
+                        <a class="nav-link" th:href="@{/conLessonPlan}">
+                            <i class="nc-icon nc-paper-2"></i>
+                            <p>Lesson Plan</p>
+                        </a>
+                    </li>
+                    </div>
+                    <div sec:authorize="hasAuthority('Teacher')">
+                    <li>
+                        <a class="nav-link" th:href="@{/conDocument}">
+                            <i class="nc-icon nc-paper-2"></i>
+                            <p>Document</p>
+                        </a>
+                    </li>
+                    </div>
+                    <div sec:authorize="hasAuthority('Teacher')">
+                    <li>
+                        <a class="nav-link" th:href="@{/conVideo}">
+                            <i class="nc-icon nc-paper-2"></i>
+                            <p>Video</p>
+                        </a>
+                    </li>
+                    </div>
+                    <div sec:authorize="hasAuthority('Teacher')">
+                    <li>
+                        <a class="nav-link" th:href="@{/conQuiz}">
+                            <i class="nc-icon nc-paper-2"></i>
+                            <p>Quiz</p>
+                        </a>
+                    </li>
+                    </div>
+                    <div sec:authorize="hasAuthority('Teacher')">
+                    <li>
+                        <a class="nav-link" th:href="@{/conView}">
+                            <i class="nc-icon nc-bell-55"></i>
+                            <p>Status</p>
+                        </a>
+                    </li>
+                    </div>
+					<div sec:authorize="hasAuthority('Admin')">
+                    <li class="nav-item active">
+                        <a class="nav-link" th:href="@{/admin/addView}">
+                            <i class="nc-icon nc-paper-2"></i>
+                            <p>Add/View Components</p>
+                        </a>
+                    </li>
+                    </div>
+                     <div sec:authorize="hasAuthority('Admin')">
+                    <li>
+                        <a class="nav-link" th:href="@{/admin/approve}">
+                            <i class="nc-icon nc-paper-2"></i>
+                            <p>Approve Components</p>
+                        </a>
+                    </li>
+                    </div>
+                </ul>
+            </div>
+        </div>
+        <div class="main-panel">
+            <!-- Navbar -->
+            <nav class="navbar navbar-expand-lg " color-on-scroll="500">
+                <div class="container-fluid">
+                    <span th:text="${LoggedUser.getFname()}"></span>
+                    <button href="" class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-bar burger-lines"></span>
+                        <span class="navbar-toggler-bar burger-lines"></span>
+                        <span class="navbar-toggler-bar burger-lines"></span>
+                    </button>
+                    <div class="collapse navbar-collapse justify-content-end" id="navigation">
+
+                        <ul class="navbar-nav ml-auto">
+                            <li class="nav-item">
+                                <a class="nav-link" th:href="@{/logout}">
+                                    <span class="no-icon">Log out</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <!-- End Navbar -->
+            <div class="content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="spk-card-body">
+                            <div class="card-header">
+                                <div id="Success"
+										style="display: none; color: green; font-size: 16px; text-align: center">Changes Updated Successfully</div>
+								<div id="Failure"
+										style="display: none; color: green; font-size: 16px; text-align: center">Please Try Again</div>    
+                            	 </div>
+                                <div class="card-body">
+                                
+                                    <form th:action="@{addClass}" method="post">
+                                       <div class="row">
+                                       <div class="col-md-4">
+                                       <div class="spk-comp-header">
+               							 <p>Add Class</p>
+                                    <div class="status" th:text="${status}"></div>
+                                    <div class="error" th:text="${dataAvailable}"></div>
+                                </div>
+                                       <input type="number" min="1" max="12" class="form-control"
+														name="classSelected" required placeholder="Enter class to be added"/>
+									
+										<div class="instr">
+										<a href="#" class="show_hide" data-content="toggle-text">Instructions?</a>
+                                                    <div class="contentInstruction" style="color:red">
+                                                    	<p> * Please Add class from 1 to 12 only</p>
+                                                    </div>	
+										</div>
+														
+                                       </div>
+                                       <div class="col-md-4 offset-md-2">
+                                       <div class="spk-comp-header">
+                						<p> Available Class</p>
+            
+                                </div>
+
+								<ul class="list-group list-group-flush">
+                                        <li th:each="classValue:${classExist}" class="list-group-item"><span> <label> <span
+												th:text="'Class ' +${classValue.getClassName()}" style="padding-right:20px"></span>
+												</label> <span th:if="${classValue.isStatus()}"> <a class="disableClass" th:value="${classValue.getClassName()}" title="Click to Disable Class"><i class="fas fa-times-circle" th:id="${classValue.getClassName()}" style="color:red"></i></a></span>
+														<span th:unless="${classValue.isStatus()}"> <a class="enableClass" th:value="${classValue.getClassName()}" title="Click to Enable Class"><i class="fas fa-check-circle" th:id="${classValue.getClassName()}" style="color:green"></i> </a></span>
+												<br />
+												</span></li>
+                                      </ul>                                       
+                                       </div>
+                                       </div>
+                                        
+                                        <button type="submit" class="btn spk-btn btn-fill pull-right" >Add Class</button>
+                                        <div class="clearfix"></div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                      
+                    </div>
+                </div>
+            </div>
+            <footer class="footer">
+                <div class="container-fluid">
+                    <nav>
+                        <p class="copyright text-center">
+                            ©
+                            <script>
+                                document.write(new Date().getFullYear())
+                            </script>
+                            Spoken Tutorial
+                        </p>
+                    </nav>
+                </div>
+            </footer>
+        </div>
+    </div>
+    
+   
+    
+        <!--  COMMON CODE FOR LIBRARY ADDED -->
+	<div th:replace="common/header :: body-bottom-scripts-Dashboard"></div>
+	<script th:inline="javascript">
+    
+		var projectPath='[(@{/})]';
+		
+	</script>
+
+</body>
+
+</html>

@@ -1,0 +1,86 @@
+<!Doctype>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<title>Courses</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="_csrf" th:content="${_csrf.token}" />
+<!-- default header name is X-CSRF-TOKEN -->
+<meta name="_csrf_header" th:content="${_csrf.headerName}" />
+
+
+<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
+<link rel="stylesheet" th:href="@{/css/style.css}" />
+<link rel="stylesheet" th:href="@{/css/main.css}" />
+<link rel="stylesheet" th:href="@{/css/all.min.css}" type="text/css" />
+<!-- <link rel="stylesheet" th:href="@{/datatables.min.css}" type="text/css" /> -->
+
+<!-- <link rel="stylesheet" th:href="@{/css/styleTemplate.css}" /> -->
+
+</head>
+
+<body>
+
+	<!--  CODE FOR NAVBAR -->
+	<div th:replace="common/header :: navbar"></div>
+	<!-- Topic list view starts here -->
+	<section id="topicListView">
+	<div class="topicList-header">
+	<div class="class-sub">
+	<span class="topicList-class" style="color: white; margin-bottom: 0px" th:if="${classSelected}">
+				<span th:text="'Class '+${classSelected}"></span>
+	</span><span style="color: white; font-weight: bold" th:if="${subjectSelected}">
+				<span th:text="${subjectSelected}"></span>
+	</span>
+	</div>
+	<div>
+	<p th:if="${TopicListOnSubjectClass}"><span th:text="${#lists.size(TopicListOnSubjectClass)}"></span> Results Found</p>
+	
+	</div>
+	
+	
+	</div>
+	<ul>
+		<li th:each="topic:${TopicListOnSubjectClass}">
+		<a th:href="@{'/contentTutorial/'+ ${topic.getTopicId()}}">
+		<div class="row">
+			<div class="col-sm-12 col-md-2 topic-img" style="height:100px !important">
+				<img th:src="@{/files/}+@{${topic.getPoster()}}" style="height:100% !important">
+			</div>
+			<div class="col-sm-12 col-md-10 topic-content">
+				<h3><span th:text="'Class '+${topic.getSubjectClassMapping().getStandard().getClassName()}+' >> '+${topic.getSubjectClassMapping().getSub().getSubName()}+ ' >> '+${topic.getTopicName()}"></span></h3>
+				<p><span th:text="${topic.getDescription()}"></span></p>
+				<p class="date">Update on: <span th:text="${#dates.format(topic.getDateModified(), 'dd MMM , yyyy')}"></span> </p>
+			</div>
+		</div>
+		</a>
+		
+		</li>
+	</ul>
+	
+	
+	
+	</section>
+	
+
+	<!-- Topic list view ends here -->
+	<div th:if="${NoTopicAvailable}">
+		<span style="color: red; margin:20%;"
+			th:text="${NoTopicAvailable}"/></span>
+	</div>
+
+
+
+
+
+	<!--  COMMON CODE FOR LIBRARY ADDED -->
+	<div th:replace="common/header :: body-bottom-scripts"></div>
+	<script th:inline="javascript">
+    
+		var projectPath='[(@{/})]';
+		
+	</script>
+</body>
+
+</html>

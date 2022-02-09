@@ -1,0 +1,227 @@
+<!Doctype>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns="http://www.w3.org/1999/xhtml">
+<head>
+
+<div th:replace="common/header :: common-header"></div>
+
+<title>Events</title>
+
+
+</head>
+
+<body>
+
+
+
+	<!--  CODE FOR NAVBAR -->
+	<div th:replace="common/header :: navbar"></div>
+
+		<div class="container" id="eventlist">
+		<div style="text-align:center">
+
+				<h1>Events</h1>
+
+			</div>
+			<!-- <div style="background-color: rgb(10, 42, 102)">
+
+				<h1 style="color: white; padding-left: 50px">Event List</h1>
+
+			</div> -->
+			<br />
+		<!-- 	<div class="pagination" style="float: right">
+				<nav aria-label="Page navigation example">
+					<ul class="pagination pg-blue">
+						<li class="page-item"
+							th:each="i:${#numbers.sequence(0,EventList.totalPages-1)}"
+							th:classappend="${current}==${i} ? 'active':''"><a
+							th:href="@{/eventsList/(page=${i})}" th:text="${i}"
+							class="page-link" th:classappend="${current}==${i} ? 'active':''" />
+
+						</li>
+
+					</ul>
+				</nav>
+
+			</div> -->
+			<br /> 
+			
+			<ul class="nav nav-tabs" id="myTab" role="tablist">
+							<li class="nav-item"><a
+								class="nav-link active"
+								id="home-tab" data-toggle="tab" href="#home" role="tab"
+								aria-controls="home" aria-selected="true">Upcoming : <span th:text="${#lists.size(PrevEventList)}"></span></a></li>
+							<li class="nav-item"><a
+								class="nav-link"
+								id="profile-tab" data-toggle="tab" href="#profile" role="tab"
+								aria-controls="profile" aria-selected="false">Archived : <span th:text="${#lists.size(FutureEventList)}"></span></a></li>
+
+			</ul>
+			
+			<div class="tab-content" id="myTabContent">
+							<div class="tab-pane fade show active"
+								id="home" role="tabpanel" aria-labelledby="home-tab"> 
+								
+									<div class="row shadow-lg p-3 mb-5 bg-white rounded"
+										th:each="event:${PrevEventList}">
+										<div class="col-md-3 event-img"> 
+											<a href="#" class="pop">
+											<img id="imagesource" th:src="@{/files/}+@{${event.getPotser_path()}}"
+												style="width:100%"	 />
+											</a>
+										</div>
+										
+										<div class="col-md-9 event-content"> 
+										<p class="event-title" th:text="${event.getHeadline()}"></p>
+										<p th:text="${event.getDescription()}"></p>
+										<div>
+										<span ><i class="fas fa-calendar-week"></i></span>
+										<span th:text="${#calendars.day(event.getDateToHappenStart())}"></span>
+												<span th:text="${#calendars.monthNameShort(event.getDateToHappenStart())} "></span> , 
+												<span th:text="${#calendars.year(event.getDateToHappenStart())} "></span>
+												
+										<span th:text="' -- '+${#calendars.day(event.getDateToHappenEnd())}"></span>
+												<span th:text="${#calendars.monthNameShort(event.getDateToHappenEnd())} "></span> , 
+												<span th:text="${#calendars.year(event.getDateToHappenEnd())} "></span>
+										</div>
+										</div>
+									</div>
+														   
+                                
+                                    
+                            </div>
+                        
+	                        <div class="tab-pane fade show"
+									id="profile" role="tabpanel" aria-labelledby="profile-tab">
+								
+								<br/>
+									<div class="row shadow-lg p-3 mb-5 bg-white rounded"
+										th:each="event:${FutureEventList}">
+										<div class="col-sm-12 col-md-4 ">
+											<a href="#" class="pop">
+											<img id="imagesource" th:src="@{/files/}+@{${event.getPotser_path()}}"
+												style="width:100%"	 />
+											</a>
+											
+										</div>
+										<div class="col-1">
+										</div>
+										<div class="col-sm-12 col-md-7">
+										
+											<div class="row" style="text-align:center">
+												<span ><i style="color: #900C3F" class="fas fa-calendar-week"></i>
+												<span th:text="${#calendars.day(event.getDateToHappenStart())}"></span>
+												<span th:text="${#calendars.monthNameShort(event.getDateToHappenStart())} "></span>
+												</span>
+											</div>
+											
+											<div class="row">
+												
+												<h2 style="color:skyblue;" th:text="${event.getHeadline()}"></h2>
+											
+											</div>
+											<hr style="margin-top: unset !important"/>
+											<div class="row">
+											
+												<p th:text="${event.getDescription()}"></p>
+												
+											</div>
+										
+										</div>
+										
+									
+									</div>
+														   
+                                
+                                    
+                            </div>
+								
+									
+							</div>
+							
+						
+                         	
+                    </div>
+			
+			
+			<!-- <div class="row shadow-lg p-3 mb-5 bg-white rounded"
+				th:each="event:${EventList}">
+				<div class="col-2" style="border-right: 1px solid #333">
+					<br /> <br />
+					<div class="row center-all-over-side">
+
+						<h1 th:text="${#calendars.day(event.getDateToHappen())}"></h1>
+					</div>
+
+					<div class="row " style="padding-left: 20%">
+
+						<h2
+							th:text="${#calendars.monthNameShort(event.getDateToHappen())} "></h2>
+					</div>
+
+
+				</div>
+
+				<div class="col-1"></div>
+				<div class="col-8">
+					<div class="row">
+						<strong><h2 th:text="${event.getHeadline()}"></h2></strong>
+					</div>
+					<hr />
+
+					<div class="row">
+						<h4 th:text="${event.getDescription()}"></h4>
+					</div>
+
+
+
+				</div>
+
+
+
+			</div>
+ -->
+
+
+		</div>
+
+
+
+
+	<!--  COMMON CODE FOR LIBRARY ADDED -->
+	<div th:replace="common/header :: body-bottom-scripts"></div>
+	<script th:inline="javascript">
+    
+		var projectPath='[(@{/})]';
+		
+	</script>
+
+	<!-- Modal  for previewing the Images -->
+	<div class="modal fade" id="imagemodal" tabindex="-1" role="dialog"
+		aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+		<div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalCenterTitle">Image
+						Viewer</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<img src="" id="imagepreview" style="width: 100%;" /> ...
+
+					<div class="modal-footer"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+
+</body>
+
+
+</html>

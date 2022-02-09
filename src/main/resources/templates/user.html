@@ -1,0 +1,362 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1000/xhtml" xmlns:sec="http://www.w3.org/1000/xhtml">
+
+<head>
+<div th:replace="common/header :: common-header-Dashboard"></div>
+<title>User Info</title>   
+
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="sidebar" th:data-image="@{/img/sidebar-5.jpg}">
+            <!--
+        Tip 1: You can change the color of the sidebar using: data-color="purple | blue | green | orange | red"
+
+        Tip 2: you can also add an image using data-image tag
+    -->
+            <div class="sidebar-wrapper">
+                <div class="logo">
+                    <a th:href="@{/}" class="simple-text">
+                        School Connex
+                    </a>
+                </div>
+                <ul class="nav">
+                    <li class="nav-item active">
+                        <a class="nav-link" th:href="@{/dashBoard}">
+                            <i class="nc-icon nc-circle-09"></i>
+                            <p>User Profile</p>
+                        </a>
+                    </li>
+                    <div sec:authorize="hasAuthority('Teacher')">
+                    <li>
+                        <a class="nav-link" th:href="@{/conArticle}">
+                            <i class="nc-icon nc-paper-2"></i>
+                            <p>Article</p>
+                        </a>
+                    </li>
+                    </div>
+                    <div sec:authorize="hasAuthority('Teacher')">
+                    <li>
+                        <a class="nav-link" th:href="@{/conConceptMap}">
+                            <i class="nc-icon nc-paper-2"></i>
+                            <p>Concepts-Map</p>
+                        </a>
+                    </li>
+                    </div>
+                    <div sec:authorize="hasAuthority('Teacher')">
+                    <li>
+                        <a class="nav-link" th:href="@{/conDocument}">
+                            <i class="nc-icon nc-paper-2"></i>
+                            <p>Document</p>
+                        </a>
+                    </li>
+                    </div>
+                    <div sec:authorize="hasAuthority('Teacher')">
+                    <li>
+                        <a class="nav-link" th:href="@{/conLessonPlan}">
+                            <i class="nc-icon nc-paper-2"></i>
+                            <p>Lesson Plan</p>
+                        </a>
+                    </li>
+                    </div>
+                    <div sec:authorize="hasAuthority('Teacher')">
+                    <li>
+                        <a class="nav-link" th:href="@{/conPhet}">
+                            <i class="nc-icon nc-paper-2"></i>
+                            <p>Phets</p>
+                        </a>
+                    </li>
+                    </div>
+                    <div sec:authorize="hasAuthority('Teacher')">
+                    <li>
+                        <a class="nav-link" th:href="@{/conQuiz}">
+                            <i class="nc-icon nc-paper-2"></i>
+                            <p>Quiz</p>
+                        </a>
+                    </li>
+                    </div>
+                   
+                    <div sec:authorize="hasAuthority('Teacher')">
+                    <li>
+                        <a class="nav-link" th:href="@{/conVideo}">
+                            <i class="nc-icon nc-paper-2"></i>
+                            <p>Video</p>
+                        </a>
+                    </li>
+                    </div>
+                    
+                    <div sec:authorize="hasAuthority('Teacher')">
+                    <li>
+                        <a class="nav-link" th:href="@{/conView}">
+                            <i class="nc-icon nc-bell-55"></i>
+                            <p>Status</p>
+                        </a>
+                    </li>
+                    </div>
+                     <div sec:authorize="hasAuthority('Admin')">
+                    <li>
+                        <a class="nav-link" th:href="@{/admin/addView}">
+                            <i class="nc-icon nc-paper-2"></i>
+                            <p>Add/View Components</p>
+                        </a>
+                    </li>
+                    </div>
+                     <div sec:authorize="hasAuthority('Admin')">
+                    <li>
+                        <a class="nav-link" th:href="@{/admin/approve}">
+                            <i class="nc-icon nc-paper-2"></i>
+                            <p>Approve Components</p>
+                        </a>
+                    </li>
+                    </div>
+
+                </ul>
+            </div>
+        </div>
+        <div class="main-panel">
+            <!-- Navbar -->
+            <nav class="navbar navbar-expand-lg " color-on-scroll="500">
+                <div class="container-fluid">
+                    <span th:text="${LoggedUser.getFname()}"></span>
+                    <button href="" class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-bar burger-lines"></span>
+                        <span class="navbar-toggler-bar burger-lines"></span>
+                        <span class="navbar-toggler-bar burger-lines"></span>
+                    </button>
+                    <div class="collapse navbar-collapse justify-content-end" id="navigation">
+                        <ul class="navbar-nav ml-auto">
+                            <li class="nav-item">
+                                <a class="nav-link" th:href="@{/logout}">
+                                    <span class="no-icon">Log out</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <!-- End Navbar -->
+            <div class="content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="spk-card-body">
+                                <div class="card-header">
+                                    <p class="profile-title">Profile</p>
+                                </div>
+                                <div class="card-body">
+                                    <form>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label for="exampleInputEmail1">Email address</label>
+                                                    <input type="email" class="form-control" placeholder="Email" disabled th:value="${LoggedUser.getEmail()}">
+                                                </div>
+                                            </div>
+                                        </div>
+                                         <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label>Joined On</label>
+                                                    <input type="text" class="form-control" placeholder="Date" disabled th:value="${LoggedUser.getDateAdded()}">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6 pr-1">
+                                                <div class="form-group">
+                                                    <label>First Name</label>
+                                                    <input type="text" class="form-control" placeholder="First Name" th:value="${LoggedUser.getFname()}" id="fname" >
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 pl-1">
+                                                <div class="form-group">
+                                                    <label>Last Name</label>
+                                                    <input type="text" class="form-control" placeholder="Last Name" th:value="${LoggedUser.getLname()}" id="lname">
+                                                </div>
+                                            </div>
+                                        </div>
+                                            <div class="row">
+                                            <div class="col-md-6 pr-1">
+                                                
+                                            </div>
+                                            <div class="col-md-6 pl-1">
+                                                <div class="form-group">
+                                           
+                                                    <button type="button" class="btn spk-btn btn-fill pull-right" id="userDetailsUpdate">Update</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                          <div class="row" sec:authorize="hasAuthority('Learner')">
+                                            <div class="col-md-6 pr-1">
+                                                <div class="form-group">
+                                                    <label>School Name</label>
+                                                    <input type="text" class="form-control" placeholder="School Name" disabled th:value="${LoggedUser.getSchoolName()}" >
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 pl-1">
+                                                <div class="form-group">
+                                                    <label>School Address</label>
+                                                    <input type="text" class="form-control" placeholder="School Address" disabled th:value="${LoggedUser.getSchoolAddress()}" >
+                                                </div>
+                                            </div>
+                                        </div>
+                                          <div class="row" sec:authorize="hasAuthority('Learner')">
+                                            <div class="col-md-6 pr-1">
+                                                <div class="form-group">
+                                                    <label>Pincode</label>
+                                                    <input type="text" class="form-control" placeholder="Pincode" disabled th:value="${LoggedUser.getPincode()}" >
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 pl-1">
+                                                <div class="form-group">
+                                                    <label>DOB</label>
+                                                    <input type="text" class="form-control" placeholder="DOB" disabled th:value="${LoggedUser.getDateOfBirth()}" >
+                                                </div>
+                                            </div>
+                                        </div>
+                                       
+                                        
+                                        <div class="">
+                                            <p class="profile-title">Update Password</p>
+                                        </div>
+                                        <div id="Success"
+										style="display: none; color: green; font-size: 18px; text-align: center">Data
+										Updated Successfully</div>
+										<div id="FailurePassMismatch"
+										style="display: none; color: red; font-size: 18px; text-align: center">New
+										Password and Confirm Password aren't same</div>
+										<div id="FailureCurPassWrong"
+										style="display: none; color: red; font-size: 18px; text-align: center">Current
+										Password is Wrong</div>
+										<div id="lengthIncorrect"
+										style="display: none; color: red; font-size: 18px; text-align: center">Password must be atleast 6 character</div>
+                                        
+                                        
+                                         <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label>Current Password</label>
+                                                    <input type="password" class="form-control" placeholder="Current Password" name="currentPasswordTeacher" id="currentPasswordTeacher" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                         <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label>New Password</label>
+                                                    <input type="password" class="form-control" placeholder="New Password" name="newPasswordTeacher" id="newPassTeacher" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                         <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label>Confirm New Password</label>
+                                                    <input type="password" class="form-control" placeholder="Confirm Password" name="confPasswordTeacher" id="confPassTeacher" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                       
+                                        <button type="button" class="btn spk-btn btn-fill pull-right" id="updatePasswordTeacher" disabled>Update Password</button>
+                                        <div class="clearfix"></div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card card-user">
+                                <div class="card-image">
+                                    <img src="https://ununsplash.imgix.net/photo-1431578500526-4d9613015464?fit=crop&fm=jpg&h=300&q=75&w=400" alt="...">
+                                </div>
+                                <div class="card-body">
+                                    <div class="author">
+                                    
+                                        <a href="#" data-toggle="modal" data-target="#ProfilePictureModal">
+                                        
+                                        	<span th:if="${LoggedUser.getProfilePic()}">
+                                        		<img class="avatar border-gray" th:src="@{files/}+@{${LoggedUser.getProfilePic()}}" th:alt="@{/img/default-avatar.png}">
+                                        	</span>
+                                        	<span th:unless="${LoggedUser.getProfilePic()}">
+                                        		<img class="avatar border-gray" th:src="@{/img/default-avatar.png}">
+                                        	</span>
+                                            
+                                            <p class="profile-title"><span th:text="${LoggedUser.getFname()}"></span></p>
+                                        </a>
+                                    
+                                    </div>
+                
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <footer class="footer">
+                <div class="container-fluid">
+                    <nav>
+
+                        <p class="copyright text-center">
+                            ©
+                            <script>
+                                document.write(new Date().getFullYear())
+                            </script>
+                            Spoken Tutorial
+                        </p>
+                    </nav>
+                </div>
+            </footer>
+        </div>
+    </div>
+    
+    <!--  COMMON CODE FOR LIBRARY ADDED -->
+	<div th:replace="common/header :: body-bottom-scripts-Dashboard"></div>
+	<script th:inline="javascript">
+    
+		var projectPath='[(@{/})]';
+		
+	</script>
+	
+	<!-- Central Modal Small -->
+	<div class="modal fade" id="ProfilePictureModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+ 	 aria-hidden="true">
+
+  <!-- Change class .modal-sm to change the size of the modal -->
+  <div class="modal-dialog modal-lg" role="document">
+
+
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title w-100" id="myModalLabel">Change Profile Picture</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      	<h4 style="text-align:center;color:green;display:none;" id="profileText">Profile Picture Updated Successfully</h4>
+      	<form action="" method="post" enctype="multipart/form-data" id="uploadProfilePic">
+      		<span th:if="${LoggedUser.getProfilePic()}">
+                <img class="avatar border-gray" id="pictureShow" th:src="@{files/}+@{${LoggedUser.getProfilePic()}}" width="100%" height="400px" /><br/>
+            </span>
+            <span th:unless="${LoggedUser.getProfilePic()}">
+                <img class="avatar border-gray" id="pictureShow" th:src="@{/img/default-avatar.png}" width="100%" height="400px"/><br/>
+            </span>
+	      	
+	        <input type="file" id="profilePicture" name="profilePicture"/>
+	    </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary btn-sm" id="chngProfilePic" disabled>Change Photo</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Central Modal Small -->
+
+</body>
+
+
+</html>

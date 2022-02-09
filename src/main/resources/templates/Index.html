@@ -1,0 +1,547 @@
+<!Doctype>
+<html xmlns:th="http://www.w3.org/1000/xhtml">
+
+
+<head>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="_csrf" th:content="${_csrf.token}" />
+<meta name="_csrf_header" th:content="${_csrf.headerName}" />
+<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
+<link rel="stylesheet" th:href="@{/css/style.css}" />
+<link rel="stylesheet" th:href="@{/css/main.css}" />
+<title>Homepage</title> 
+
+</head>
+
+<body>
+
+	<!-- Registration confirmation -->
+	<div th:if="${registerDone}">
+		<input type="hidden" value="yes" id="reg">
+	</div>
+	
+	<div th:unless="${registerDone}">
+		<input type="hidden" value="no" id="reg">
+	</div>
+	<div>
+		
+		<div th:replace="common/header :: navbar"></div>
+	</div>
+	<section class="intro" id="home">
+	<div class="i-select">
+	<form th:action="@{/courses}" method="get">
+	<div class="search row">
+	<div class="col-md-4">
+	<select class="form-control c-select"  name="classSelected" id="inputClass">
+  			<option>Select Class</option>
+  			<span th:each="classValue: ${classfromDatabase}">
+  				<div th:if="${classValue.isStatus()}">
+				<option><span  th:text="'Class '+${classValue.getClassName()}"></span></option>
+				</div>
+			</span>
+	</select>
+	</div>
+	<div class="col-md-4">
+	<select class="form-control c-select" name="subjectSelected" id="subjectHome">
+  			<option>Select Subject</option>
+  			<span th:each="subjectValue: ${subjectfromDatabase}">
+  				<div th:if="${subjectValue.isStatus()}">
+				<option><span th:text="${subjectValue.getSubName()}"></span></option>
+				</div>
+			</span>
+	</select>
+	</div>
+	<div class="col-md-4">
+	<select class="form-control c-select" name="topicSelected" id="topicSelected">
+  			<option value="Select Topic">Select Topic</option>
+	</select>
+	</div>	
+	</div>
+	
+	<div class="row">
+	<div class="col-md-12 search-btn">
+	<button type="submit" class="btn c-btn">SUBMIT</button>
+	</div>
+	</div>
+	</form>
+	
+	<div>
+	<div class="tagline">
+			<h1>Repository for School <br> 
+			Teaching & Learning Resources</h1>
+		</div>
+	</div>
+	</div>
+	<div class="row">
+	<div class="col-lg-6 i-content">
+	</div>
+	<div class="col-lg-6 i-img"></div>
+	</div>	
+	</section>
+	
+	<section class="about" id="About-us">
+	<div class="row">
+		<div class="col-md-6 a-content">
+		<h1>About Us</h1>
+		<h5>Repository For School Resources</h5>
+		<p>Spoken Tutorial School Connex is a derivative of the multi-award winning educational content portal - Spoken Tutorial.  
+		Here you can access various free educational resources that will help you in understanding School level Science and Maths concepts clearly.  
+		Teachers, Students and Parents can use all these resources for teaching-learning purposes, free of cost.  
+		All the content published on this website is shared under the CC BY SA license. </p>
+		<a th:href="@{/About-Us}" class="c-btn" style="padding: 10px 20px;">Read More</a>
+		</div>
+		<div class="col-md-6 a-img">
+		<img th:src="@{/Images/about_us.jpg}">
+		</div>
+	</div>
+	</section>
+	<section class="resources" style="border-bottom: 1px solid #E6E6E6;" id="Resources">
+		<h1>Teaching / Learning Resources</h1>
+		<div>
+		<p>These quick and clever resources can be used by <span class="ul">Teachers</span> to prepare lesson plans, explain abstract concepts and 
+		give digital assignments to students, by <span class="ul">Students</span> to understand difficult concepts and practise them,
+		 by <span class="ul">Parents</span> to help and guide their children.</p>
+		</div>
+		<div class="row">
+			<div class="col-md-4 rb-border">
+				<div>
+				
+				<span class="r-icon">
+				<svg class="svg-inline--fa fa-book-open fa-w-18" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="book-open" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" data-fa-i2svg=""><path fill="currentColor" d="M542.22 32.05c-54.8 3.11-163.72 14.43-230.96 55.59-4.64 2.84-7.27 7.89-7.27 13.17v363.87c0 11.55 12.63 18.85 23.28 13.49 69.18-34.82 169.23-44.32 218.7-46.92 16.89-.89 30.02-14.43 30.02-30.66V62.75c.01-17.71-15.35-31.74-33.77-30.7zM264.73 87.64C197.5 46.48 88.58 35.17 33.78 32.05 15.36 31.01 0 45.04 0 62.75V400.6c0 16.24 13.13 29.78 30.02 30.66 49.49 2.6 149.59 12.11 218.77 46.95 10.62 5.35 23.21-1.94 23.21-13.46V100.63c0-5.29-2.62-10.14-7.27-12.99z"></path></svg>
+				<!-- <i class="fas fa-book-open"></i> -->
+				</span><span class="r-header">Concept-Maps</span></div>
+				<div><p>A diagram that depicts suggested relationships between concepts</p></div>
+			</div>
+			<div class="col-md-4 rb-border">
+				<div><span class="r-icon">
+				<!-- <i class="far fa-file-video"></i> -->
+				<svg class="svg-inline--fa fa-file-video fa-w-12" aria-hidden="true" focusable="false" data-prefix="far" data-icon="file-video" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" data-fa-i2svg=""><path fill="currentColor" d="M369.941 97.941l-83.882-83.882A48 48 0 0 0 252.118 0H48C21.49 0 0 21.49 0 48v416c0 26.51 21.49 48 48 48h288c26.51 0 48-21.49 48-48V131.882a48 48 0 0 0-14.059-33.941zM332.118 128H256V51.882L332.118 128zM48 464V48h160v104c0 13.255 10.745 24 24 24h104v288H48zm228.687-211.303L224 305.374V268c0-11.046-8.954-20-20-20H100c-11.046 0-20 8.954-20 20v104c0 11.046 8.954 20 20 20h104c11.046 0 20-8.954 20-20v-37.374l52.687 52.674C286.704 397.318 304 390.28 304 375.986V264.011c0-14.311-17.309-21.319-27.313-11.314z"></path></svg>
+				</span><span class="r-header">Tutorials</span></div>
+				<div><p>Spoken Tutorials on more than 50+ topics in 22+ Indian languages</p></div>
+			</div>
+			<div class="col-md-4 b-border">
+				<div><span class="r-icon">
+				<!-- <i class="fas fa-atom"></i> -->
+				<svg class="svg-inline--fa fa-atom fa-w-14" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="atom" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M413.03 256c40.13-54.89 41.51-98.62 25.14-128-10.91-19.52-40.54-50.73-116.33-41.88C300.36 34.89 267.64 0 224 0s-76.36 34.89-97.84 86.12C50.43 77.34 20.73 108.48 9.83 128c-16.38 29.4-15 73.09 25.14 128-40.13 54.89-41.51 98.62-25.14 128 29.21 52.34 101.68 43.58 116.33 41.88C147.63 477.1 180.36 512 224 512s76.37-34.9 97.84-86.12c14.64 1.7 87.11 10.46 116.33-41.88 16.38-29.4 15-73.09-25.14-128zM63.38 352c-4.03-7.21-.19-24.8 14.95-48.29 6.96 6.53 14.2 12.89 21.87 19.18 1.71 13.71 4 27.08 6.76 40.08-24.56.89-39.89-4.37-43.58-10.97zm36.82-162.88c-7.66 6.29-14.9 12.65-21.87 19.18-15.13-23.5-18.97-41.09-14.95-48.3 3.41-6.14 16.39-11.47 37.92-11.47 1.71 0 3.87.3 5.69.37a472.191 472.191 0 0 0-6.79 40.22zM224 64c9.47 0 22.2 13.52 33.86 37.26-11.19 3.7-22.44 8-33.86 12.86-11.42-4.86-22.67-9.16-33.86-12.86C201.8 77.52 214.53 64 224 64zm0 384c-9.47 0-22.2-13.52-33.86-37.26 11.19-3.7 22.44-8 33.86-12.86 11.42 4.86 22.67 9.16 33.86 12.86C246.2 434.48 233.47 448 224 448zm62.5-157.33c-26.7 19.08-46.14 29.33-62.5 37.48-16.35-8.14-35.8-18.41-62.5-37.48-1.99-27.79-1.99-41.54 0-69.33 26.67-19.05 46.13-29.32 62.5-37.48 16.39 8.17 35.86 18.44 62.5 37.48 1.98 27.78 1.99 41.53 0 69.33zM384.62 352c-3.67 6.62-19 11.82-43.58 10.95 2.76-13 5.05-26.37 6.76-40.06 7.66-6.29 14.9-12.65 21.87-19.18 15.13 23.49 18.97 41.08 14.95 48.29zm-14.95-143.71c-6.96-6.53-14.2-12.89-21.87-19.18a473.535 473.535 0 0 0-6.79-40.22c1.82-.07 3.97-.37 5.69-.37 21.52 0 34.51 5.34 37.92 11.47 4.02 7.22.18 24.81-14.95 48.3zM224 224c-17.67 0-32 14.33-32 32s14.33 32 32 32 32-14.33 32-32-14.33-32-32-32z"></path></svg>
+				
+				</span><span class="r-header">PhETs</span></div>
+				<div><p>An acronym for "Physics Education Technology", includes simulations about many topics </p></div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-4 r-border">
+				<div><span class="r-icon">
+				<!-- <i class="fas fa-link"></i> -->
+				<svg class="svg-inline--fa fa-link fa-w-16" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="link" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"></path></svg>
+				
+				</span><span class="r-header">Links</span></div>
+				<div><p>Links to various educational articles, documents and videos.</p></div>
+			</div>
+			<div class="col-md-4 r-border">
+				<div><span class="r-icon">
+				<!-- <i class="far fa-list-alt"></i> -->
+				<svg class="svg-inline--fa fa-list-alt fa-w-16" aria-hidden="true" focusable="false" data-prefix="far" data-icon="list-alt" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M464 32H48C21.49 32 0 53.49 0 80v352c0 26.51 21.49 48 48 48h416c26.51 0 48-21.49 48-48V80c0-26.51-21.49-48-48-48zm-6 400H54a6 6 0 0 1-6-6V86a6 6 0 0 1 6-6h404a6 6 0 0 1 6 6v340a6 6 0 0 1-6 6zm-42-92v24c0 6.627-5.373 12-12 12H204c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h200c6.627 0 12 5.373 12 12zm0-96v24c0 6.627-5.373 12-12 12H204c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h200c6.627 0 12 5.373 12 12zm0-96v24c0 6.627-5.373 12-12 12H204c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h200c6.627 0 12 5.373 12 12zm-252 12c0 19.882-16.118 36-36 36s-36-16.118-36-36 16.118-36 36-36 36 16.118 36 36zm0 96c0 19.882-16.118 36-36 36s-36-16.118-36-36 16.118-36 36-36 36 16.118 36 36zm0 96c0 19.882-16.118 36-36 36s-36-16.118-36-36 16.118-36 36-36 36 16.118 36 36z"></path></svg>
+				</span><span class="r-header">Lesson Plans</span></div>
+				<div><p>Learning trajectory for lessons \ topics</p></div>
+			</div>
+			<div class="col-md-4">
+				<div><span class="r-icon">
+				<!-- <i class="far fa-clipboard"></i> -->
+				<svg class="svg-inline--fa fa-clipboard fa-w-12" aria-hidden="true" focusable="false" data-prefix="far" data-icon="clipboard" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" data-fa-i2svg=""><path fill="currentColor" d="M336 64h-80c0-35.3-28.7-64-64-64s-64 28.7-64 64H48C21.5 64 0 85.5 0 112v352c0 26.5 21.5 48 48 48h288c26.5 0 48-21.5 48-48V112c0-26.5-21.5-48-48-48zM192 40c13.3 0 24 10.7 24 24s-10.7 24-24 24-24-10.7-24-24 10.7-24 24-24zm144 418c0 3.3-2.7 6-6 6H54c-3.3 0-6-2.7-6-6V118c0-3.3 2.7-6 6-6h42v36c0 6.6 5.4 12 12 12h168c6.6 0 12-5.4 12-12v-36h42c3.3 0 6 2.7 6 6z"></path></svg>
+				
+				</span><span class="r-header">Quizzes</span></div>
+				<div><p>Questions & solutions to assess student's concepts</p></div>
+			</div>
+		</div>
+	</section>
+	
+	<section class="events" th:if="${Events != null}" id="Event">
+	<div class="row">
+	<div class="col-md-12 events-heading"><h1>Events</h1></div>
+	</div>
+	
+	<div class="row">
+	<div class="col-md-7">
+	<div class="row item" th:each="event:${Events}">
+		<div th:class="${eventStat.even} ? 'col-sm-12 col-md-4 col-lg-2 e-calender e-even' : 'col-sm-12 col-md-4 col-lg-2 e-calender e-odd'">
+		<p><i class="far fa-calendar-alt e-cal"></i></p>
+		<div th:if="${#calendars.monthNameShort(event.getDateToHappenStart()) == #calendars.monthNameShort(event.getDateToHappenEnd())}">
+		<p style="text-align:center" th:text="${#calendars.day(event.getDateToHappenStart())+ ' - '+ #calendars.day(event.getDateToHappenEnd()) + ' ' + #calendars.monthNameShort(event.getDateToHappenStart())} "></p>
+		</div>
+		<div th:unless="${#calendars.monthNameShort(event.getDateToHappenStart()) == #calendars.monthNameShort(event.getDateToHappenEnd())}">
+		<p style="text-align:center" th:text="${#calendars.day(event.getDateToHappenStart())+ ' ' + #calendars.monthNameShort(event.getDateToHappenStart()) + ' - ' + #calendars.day(event.getDateToHappenEnd())+ '  '+#calendars.monthNameShort(event.getDateToHappenEnd())} "></p>
+		
+		</div>
+		</div>
+		<div class="col-sm-12 col-md-8 col-lg-10 e-content">
+		<p th:text="${event.getHeadline()}" class="e-title"></p>
+		<p><i class="fas fa-map-marker-alt e-map"></i> <span th:text="${event.getLocation()}"></span></p>
+		</div>
+	</div>
+	<a th:href="@{eventsList}" class="know-more-btn"><div class="row know-more">Click here for all events information</div></a>
+	
+	</div>
+	<div class="col-md-4  quote">
+	<p><i class="fas fa-quote-left icon-quote-l"></i>
+	Creativity is the key to success in the future, and primary education is where 
+	teachers can bring creativity in children at that level.<i class="fas fa-quote-right icon-quote-r"></i></p>
+	<hr><p><i class="fas fa-quote-left icon-quote-l"></i>
+	The future of the nation depends on the quality of primary education imparted.<i class="fas fa-quote-right icon-quote-r"></i>
+	</p>
+	<!-- <br> -->
+	<span class="dr-apj">- Dr. A. P. J. Abdul Kalam</span>
+	</div>
+	</div>
+	
+	
+	</section>
+	
+	<section class="testimonials" th:if="${TestimonialRest!= null}" id="Testimonial">
+	<h1>Testimonials</h1>
+	<div class="card-deck">
+		<div class="card t-item" th:each="testi:${TestimonialRest}">
+		  <div class="card-body" >
+		    
+		  <p> <span th:text="${#strings.abbreviate(testi.getDescription(),250)} "/>.... <span><a class="testimonialModal" th:value="${testi.getTestimonialId()}"><i class="far fa-plus-square t-plus"></i></a>    </span></p>
+		  <!-- <p> <span th:text="${testi.getDescription()}"/>.... <span><a class="testimonialModal" th:value="${testi.getTestimonialId()}"><i class="far fa-plus-square t-plus"></i></a>    </span></p> -->
+				<p class="t-name" th:text="${testi.getName()}"></p>
+				<p class="t-info" th:text="${testi.getOrganization()}"></p>
+		  </div>
+		</div>
+  		
+	</div>
+	<a th:href="@{testimonials}" class="know-more-btn-t" ><div class=" know-more" >View all Testimonials</div></a>
+	</section>
+	
+	<h1 class="contact-header text-center" id="Contact-us">Contact</h1>
+	<section class="c-footer">
+	<div class="row">
+	<div class="col-md-3 f-info f-address">
+	<p>
+	<!-- <i class="fas fa-map-marked-alt f-icon"></i> -->
+	<svg class="svg-inline--fa fa-map-marked-alt fa-w-18 f-icon" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="map-marked-alt" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" data-fa-i2svg=""><path fill="currentColor" d="M288 0c-69.59 0-126 56.41-126 126 0 56.26 82.35 158.8 113.9 196.02 6.39 7.54 17.82 7.54 24.2 0C331.65 284.8 414 182.26 414 126 414 56.41 357.59 0 288 0zm0 168c-23.2 0-42-18.8-42-42s18.8-42 42-42 42 18.8 42 42-18.8 42-42 42zM20.12 215.95A32.006 32.006 0 0 0 0 245.66v250.32c0 11.32 11.43 19.06 21.94 14.86L160 448V214.92c-8.84-15.98-16.07-31.54-21.25-46.42L20.12 215.95zM288 359.67c-14.07 0-27.38-6.18-36.51-16.96-19.66-23.2-40.57-49.62-59.49-76.72v182l192 64V266c-18.92 27.09-39.82 53.52-59.49 76.72-9.13 10.77-22.44 16.95-36.51 16.95zm266.06-198.51L416 224v288l139.88-55.95A31.996 31.996 0 0 0 576 426.34V176.02c0-11.32-11.43-19.06-21.94-14.86z"></path></svg>
+	
+	</p>
+	<p>Spoken Tutorial Project</p>
+	<p>TCS Lab, Behind CAD Center,</p>
+	<p>IIT Bombay, Powai,</p>
+	<p>Mumbai - 400076</p>
+	</div>
+	<div class="col-md-3 f-info f-contact">
+	<!-- <h1 style="color: #fff;">Contact</h1> -->
+	<p>
+	<!-- <i class="fas fa-phone-square-alt f-icon"></i> -->
+	<svg class="svg-inline--fa fa-phone-square-alt fa-w-14 f-icon" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="phone-square-alt" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M400 32H48A48 48 0 0 0 0 80v352a48 48 0 0 0 48 48h352a48 48 0 0 0 48-48V80a48 48 0 0 0-48-48zm-16.39 307.37l-15 65A15 15 0 0 1 354 416C194 416 64 286.29 64 126a15.7 15.7 0 0 1 11.63-14.61l65-15A18.23 18.23 0 0 1 144 96a16.27 16.27 0 0 1 13.79 9.09l30 70A17.9 17.9 0 0 1 189 181a17 17 0 0 1-5.5 11.61l-37.89 31a231.91 231.91 0 0 0 110.78 110.78l31-37.89A17 17 0 0 1 299 291a17.85 17.85 0 0 1 5.91 1.21l70 30A16.25 16.25 0 0 1 384 336a17.41 17.41 0 0 1-.39 3.37z"></path></svg>
+	
+	</p>
+	<p>+ 91 22 25764229</p>
+	<br>
+	<p>
+	<!-- <i class="fas fa-envelope f-icon"></i> -->
+	<svg class="svg-inline--fa fa-envelope fa-w-16 f-icon" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="envelope" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M502.3 190.8c3.9-3.1 9.7-.2 9.7 4.7V400c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V195.6c0-5 5.7-7.8 9.7-4.7 22.4 17.4 52.1 39.5 154.1 113.6 21.1 15.4 56.7 47.8 92.2 47.6 35.7.3 72-32.8 92.3-47.6 102-74.1 131.6-96.3 154-113.7zM256 320c23.2.4 56.6-29.2 73.4-41.4 132.7-96.3 142.8-104.7 173.4-128.7 5.8-4.5 9.2-11.5 9.2-18.9v-19c0-26.5-21.5-48-48-48H48C21.5 64 0 85.5 0 112v19c0 7.4 3.4 14.3 9.2 18.9 30.6 23.9 40.7 32.4 173.4 128.7 16.8 12.2 50.2 41.8 73.4 41.4z"></path></svg>
+	
+	</p>
+	<p> contact-school@spoken-tutorial.org</p>
+	</div>
+	<div class="col-md-6 f-msg">
+	<div><h5>Feedback / Collaborate with us</h5></div>
+	<div class="w3agile_contact_left f-form">
+
+					<input type="text" id="name" name="Name" placeholder="Name"
+						required /> <input type="email" id="email" name="Email"
+						placeholder="Email" required />
+					<textarea name="Message" id="message" placeholder="Message.."
+						required></textarea>
+					<div id="statusOnContactForm"
+						style="color: red; display: none; margin-top: 10px;">Provide
+						Correct E-mail</div>
+					<div id="statusOnContactFormAfterAjaxCallSucess"
+						style="color: green; display: none; margin-top: 10px;">Query has been recorded,Soon you will be contacted.
+					</div>
+					<div id="statusOnContactFormAfterAjaxCallFailure"
+						style="color: red; display: none; margin-top: 10px;">Please
+						Try Again</div>
+					<button class="btn f-btn" style="margin-top: 30px"
+						id="contactForm" disabled>Send</button>
+
+				</div>
+	</div>
+	</div>
+	</section>
+
+	
+	<!-- <section class="section-header" style="background: #a5b5b3">
+		<div class="container">
+			<div class="section1">
+				<h3 class="section-title-except-contact-us">Check out Our
+					Latest Videos</h3>
+				<div class="line" style="width: 20%"></div>
+			</div>
+
+			<div id="carouselExampleInterval" class="carousel slide"
+				data-ride="carousel">
+				<div class="carousel-inner">
+					<div class="carousel-item active">
+						<div class="row" style="padding-left:100px;padding-right: 100px">
+							<div class="col-sm-6 column-video-property">
+								<div class="embed-responsive embed-responsive-16by9">
+									<iframe class="embed-responsive-item"
+										src="https://www.youtube.com/embed/ru032Mfsfig"
+										frameborder="0"
+										allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+										allowfullscreen></iframe>
+								</div>
+							</div>
+
+							<div class="col-sm-6 column-video-property">
+								<div class="embed-responsive embed-responsive-16by9">
+									<iframe class="embed-responsive-item"
+										src="https://www.youtube.com/embed/8Posj4WMo0o"
+										frameborder="0"
+										allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+										allowfullscreen></iframe>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="carousel-item">
+						<div class="row" style="padding-left:100px;padding-right: 100px">
+							<div class="col-sm-6 column-video-property">
+								<div class="embed-responsive embed-responsive-16by9">
+									<iframe class="embed-responsive-item"
+										src="https://www.youtube.com/embed/xFQgt47_R2Y"
+										frameborder="0"
+										allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+										allowfullscreen></iframe>
+								</div>
+							</div>
+
+							<div class="col-sm-6 column-video-property">
+								<div class="embed-responsive embed-responsive-16by9">
+									<iframe class="embed-responsive-item"
+										src="https://www.youtube.com/embed/8Posj4WMo0o"
+										frameborder="0"
+										allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+										allowfullscreen></iframe>
+								</div>
+							</div>
+						</div>
+
+					</div>
+					<div class="carousel-item">
+						<div class="row" style="padding-left:100px;padding-right: 100px">
+							<div class="col-sm-6 column-video-property">
+								<div class="embed-responsive embed-responsive-16by9">
+									<iframe class="embed-responsive-item"
+										src="https://www.youtube.com/embed/ru032Mfsfig"
+										frameborder="0"
+										allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+										allowfullscreen></iframe>
+								</div>
+							</div>
+
+							<div class="col-sm-6 column-video-property">
+								<div class="embed-responsive embed-responsive-16by9">
+									<iframe class="embed-responsive-item"
+										src="https://www.youtube.com/embed/8Posj4WMo0o"
+										frameborder="0"
+										allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+										allowfullscreen></iframe>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+
+				<a class="carousel-control-prev" href="#carouselExampleInterval"
+					role="button" data-slide="prev"> <span class="sr-only">Previous</span>
+				</a> <a class="carousel-control-next" href="#carouselExampleInterval"
+					role="button" data-slide="next"> <span class="sr-only">Next</span>
+				</a>
+				
+				<a class="carousel-control-prev " href="#carouselExampleInterval"
+						role="button" data-slide="prev"> <span
+						class="icon-prev carousel-control-prev-icon " aria-hidden="true"></span>
+						<span class="sr-only">Previous</span>
+					</a> <a class="carousel-control-next right carousel-control"
+						href="#carouselExampleInterval" role="button" data-slide="next"> <span
+						class="icon-next carousel-control-next-icon" aria-hidden="true"></span>
+						<span class="sr-only">Next</span>
+					</a>
+			</div>
+
+		</div>
+	</section> -->
+
+	<!--  ********************************FOOTER SECTION *********************************** -->
+	<div th:replace="common/header ::footer"></div>
+
+
+	<!-- Modal  for previewing the Images -->
+	<div class="modal fade" id="imagemodal" tabindex="-1" role="dialog"
+		aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+		<div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalCenterTitle">Image
+						Viewer</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<img src="" id="imagepreview" style="width: 100%;" /> ...
+
+					<div class="modal-footer"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- Modal for registration update  -->
+	<div class="modal fade" id="registerModal" tabindex="-1" role="dialog"
+		aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+		<div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalCenterTitle">Registration Update</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<h6 style="text-align:center">Registration is completed Successfully</h6>
+
+					<div class="modal-footer"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	
+		<!-- Modal -->
+	<div class="modal fade" id="testimonialModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+	  <div class="modal-dialog modal-dialog-centered" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	      <div class="modal-title" id="testimonialModalTitle">
+	      <h5 class="modal-title t-name" id="testiDataName"></h5>
+	      <p class="t-info" id="testiDataProf"></p>
+	      </div>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <div class="modal-body">
+	        <p id="testiDataDesc"></p>
+	        <div id="pdfdiv" style="display:none">
+	        
+			</div>
+			<div id="videodiv" style="display:none">
+			
+				
+			</div>
+	      </div>
+	      <div class="modal-footer">
+	      </div>
+	    </div>
+	  </div>
+	</div>
+	
+		
+	
+		<script
+			src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+			integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+			crossorigin="anonymous"></script>
+		<script th:src="@{/js/jquery-3.4.1.min.js}"></script>
+		<script th:src="@{/js/bootstrap.min.js}"></script>
+		  <!-- <script th:src="@{/js/all.js}"></script>  -->
+		<script th:src="@{/js/ajaxPoperty.js}"></script>
+		
+	<script  th:inline="javascript">
+	
+	var projectPath='[(@{/})]';
+	
+	$(function(){
+							
+		$('.testimonialModal').click(function(){
+			var testi_id=$(this).attr('value');
+			
+			$('#videodiv').css('display','none');
+			$('#pdfdiv').css('display','none');
+			
+			var testimonialID={
+					"testimonialId":testi_id
+				};
+				
+				var urlPassed;
+				
+	        	urlPassed= projectPath+"loadByTestimonialID";
+			
+				var token = $("meta[name='_csrf']").attr("content");
+				var header = $("meta[name='_csrf_header']").attr("content");
+				
+				$.ajax({
+			  	type: "POST",
+	        	contentType: "application/json",
+	       		 url: urlPassed,
+	       		 data: JSON.stringify(testimonialID),
+	       		 beforeSend: function(xhr) {
+                     xhr.setRequestHeader(header, token);
+	       		 },
+	       		 dataType: 'json',
+	       		 cache: false,
+	        	 timeout: 600000,
+	       		 success: function (data){
+	       			 
+	       			$('#testiDataName').text(data["name"]);
+	       			$('#testiDataProf').text(data["organization"]);
+	       			$('#testiDataDesc').text(data["description"]);
+	       			
+	       			if(data["filePath"] != null){
+	       			
+		       			var tempPdf='<a href="'+'[(@{/files/})]'+data["filePath"]+'" target="_blank" class="pdfclass"><i class="fas fa-external-link-alt"></i></a>';
+		       		 	$('#pdfdiv').html(tempPdf);
+		       		 	$('#pdfdiv').css('display','block');
+	       		 	
+	       			}else if(data["videoPath"] != null){
+	       				
+		       			var vik='<video width="480" height="150" controls><source src="'+  '[(@{/files/})]'+data["videoPath"] + '"type="video/mp4"/> </video>';
+		     
+		       			$('#videodiv').html(vik);
+			       		$('#videodiv').css('display','block');
+	       			}
+	       			
+	     
+	       		
+				},
+				
+				error : function(err){
+					console.log("not working. ERROR: "+JSON.stringify(err));
+				}
+				
+			});
+				
+				$('#testimonialModal').modal('show');
+			
+		})
+		
+		
+	});
+	
+	
+	</script>
+
+
+
+
+</body>
+
+
+</html>
