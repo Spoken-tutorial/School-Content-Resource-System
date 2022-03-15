@@ -1202,6 +1202,38 @@ public class HomeController {
 		return mv;
 	}
 
+	@RequestMapping(path = "/contentJmol/{topicId}", method = RequestMethod.GET)
+	public ModelAndView contentJmol(@PathVariable("topicId") int topicId, ModelAndView mv) {
+
+		ArrayList<Class> standard = (ArrayList<Class>) classService.findAll();
+		mv.addObject("classfromDatabase", standard);
+
+		ArrayList<Subject> subjectData = (ArrayList<Subject>) subjectService.findAll();
+		mv.addObject("subjectfromDatabase", subjectData);
+
+		Topic localTopic = topicService.findById(topicId);
+		
+		if(localTopic.getStatus()==0) {
+			
+			mv.setViewName("redirect:/");
+			return mv;
+			
+		}
+
+		List<Phets> localPhets = phetService.findAllByTopicAndStatus(localTopic);
+
+		if (localPhets.isEmpty()) {
+			mv.addObject("PhetError", "Nothing To Show");
+		}
+
+		mv.addObject("PhetOnTopic", localPhets);
+
+		mv.addObject("subjectSelected", localTopic.getSubjectClassMapping().getSub().getSubName());
+		mv.addObject("classSelected", localTopic.getSubjectClassMapping().getStandard().getClassName());
+		mv.addObject("TopicSelected", localTopic);
+		mv.setViewName("contentJmol");
+		return mv;
+	}
 
 
 	/************************************** Testimonial Page *****************************************************/
