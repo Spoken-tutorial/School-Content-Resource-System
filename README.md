@@ -54,12 +54,19 @@ https://user-images.githubusercontent.com/35317861/160242158-a19e27a6-015a-485b-
 **Configuration**
 
 Download the entire project and open in Eclipse(for best experience).
+
 At the time of building the project, I have used jave 1.8.0_271 (or any Java8 will do)
-Dowload mysql connector jar, unzip it and in external jar, browse to location where you have kept the downloaded(and unzipped jar)
-You can set the password for root as mysql or you can use any(just you need to change the places where I have incoked connection)
-In SpokenTutorial.SQL find in this project you will find all the DDLs and intial insert vlaues to start with.
-Start the project.
-From the interface create 2 users.
-Now go to the database(I have used MySQL workbench) and make one user as admin(by updating the user_roles table, change the role_id from 2 to 3 to make it admin).
+
 Used tomact v8.5.77
 
+Dowload mysql connector jar, unzip it and in external jar, browse to location where you have kept the downloaded(and unzipped jar)
+
+You can set the password for root as mysql or you can use any(just you need to change the places where I have incoked connection)
+
+In SpokenTutorial.SQL find in this project you will find all the DDLs and intial insert vlaues to start with.
+
+Start the project.
+
+From the interface create 2 users.
+
+Now go to the database(I have used MySQL workbench) and make one user as admin(by updating the user_roles table, change the role_id from 2 to 3 to make it admin).
