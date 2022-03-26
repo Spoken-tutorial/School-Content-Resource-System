@@ -1,0 +1,77 @@
+<web-app>
+<display-name>BeginnersBookDemo</display-name>
+<welcome-file-list>
+<welcome-file>index.html</welcome-file>
+<welcome-file>index.htm</welcome-file>
+<welcome-file>index.jsp</welcome-file>
+<welcome-file>default.html</welcome-file>
+<welcome-file>default.htm</welcome-file>
+<welcome-file>default.jsp</welcome-file>
+</welcome-file-list>
+
+<servlet>
+<servlet-name>RegisterUser</servlet-name>
+<servlet-class>repohandler.Registration</servlet-class>
+</servlet>
+<servlet-mapping>
+<servlet-name>RegisterUser</servlet-name>
+<url-pattern>/register</url-pattern>
+</servlet-mapping>
+   <servlet>
+    <servlet-name>user_login_verification</servlet-name>
+    <servlet-class>repohandler.UserLoginVerification</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>user_login_verification</servlet-name>
+    <url-pattern>/user_login_verification</url-pattern>
+  </servlet-mapping>
+  
+  
+  
+   <servlet>
+    <servlet-name>Auto</servlet-name>
+    <servlet-class>repohandler.AutoComplete</servlet-class>
+  </servlet>
+  <servlet-mapping>
+     <servlet-name>Auto</servlet-name>
+     <url-pattern>/Auto</url-pattern>
+  </servlet-mapping>
+  
+     <servlet>
+    <servlet-name>Data</servlet-name>
+    <servlet-class>repohandler.DataSource</servlet-class>
+  </servlet>
+  <servlet-mapping>
+     <servlet-name>Data</servlet-name>
+     <url-pattern>/Data</url-pattern>
+  </servlet-mapping>
+  
+       <servlet>
+    <servlet-name>unzip</servlet-name>
+    <servlet-class>repohandler.unzip</servlet-class>
+  </servlet>
+  <servlet-mapping>
+     <servlet-name>unzip</servlet-name>
+     <url-pattern>/unzip</url-pattern>
+  </servlet-mapping>
+
+
+
+<context-param> 
+   <description>Location to store uploaded file</description> 
+   <param-name>file-upload</param-name> 
+   <param-value>
+      /home/dutta/workspace/spoken_school_resource_system/WebContent/static/resource/1/
+   </param-value> 
+</context-param>
+
+
+
+<context-param> 
+   <description>Location to store uploaded html or png file</description> 
+   <param-name>mindmap-upload</param-name> 
+   <param-value>
+      /home/dutta/workspace/spoken_school_resource_system/WebContent/static/resource/4/
+   </param-value> 
+</context-param>
+</web-app>
