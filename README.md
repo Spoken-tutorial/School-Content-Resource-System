@@ -9,11 +9,11 @@
 
 **Interface categories**
 
-1. End User Interface: Can search for resources like tutorials, interactive modules, mind-maps and addtional links by selecting subjects and class. User can also browse content through the topic search option which auto populates the list of available topics based on keystrokes.
+```1. End User Interface: Can search for resources like tutorials, interactive modules, mind-maps and addtional links by selecting subjects and class. User can also browse content through the topic search option which auto populates the list of available topics based on keystrokes.```
 
-2. Contributor Interface: Can upload various resources to the system.
+```2. Contributor Interface: Can upload various resources to the system.```
 
-3. Admin Interface: Can review and publish the resources uploaded by the contributor.
+```3. Admin Interface: Can review and publish the resources uploaded by the contributor.```
 
 
 **Demo Videos**
