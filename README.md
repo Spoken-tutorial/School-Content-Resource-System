@@ -36,37 +36,37 @@ https://user-images.githubusercontent.com/35317861/160242158-a19e27a6-015a-485b-
 
 **Silent features and learnings from project**
 
-```Build Maven web project on Eclipse.```
+```a. Build Maven web project on Eclipse.```
 
-```Add dependecies in pom.xml files of various .jar like mysql connector used```
+```b. Add dependecies in pom.xml files of various .jar like mysql connector used```
 
-```Add servlet mappings in web.xml to use services of backend(querying database and returning results) using inputs from frontend.```
+```c. Add servlet mappings in web.xml to use services of backend(querying database and returning results) using inputs from frontend.```
 
-```Work with servlets and Java Server Pages.```
+```d. Work with servlets and Java Server Pages.```
 
-```Work with MySQL and connect using jdbc.```
+```e. Work with MySQL and connect using jdbc.```
 
-```Adding features like auto-list contents as user types in searchbox.```
+```f. Adding features like auto-list contents as user types in searchbox.```
 
-```Added checks in form like requirement for good password and implementing MD5 to store password in DB in protected form.```
+```g. Added checks in form like requirement for good password and implementing MD5 to store password in DB in protected form.```
 
 
 **Configuration**
 
-Download the entire project and open in Eclipse(for best experience).
+```1. Download the entire project and open in Eclipse(for best experience).```
 
-At the time of building the project, I have used jave 1.8.0_271 (or any Java8 will do)
+```2. At the time of building the project, I have used jave 1.8.0_271 (or any Java8 will do)```
 
-Used tomact v8.5.77
+```3. Used tomact v8.5.77```
 
-Dowload mysql connector jar, unzip it and in external jar, browse to location where you have kept the downloaded(and unzipped jar)
+```4. Dowload mysql connector jar, unzip it and in external jar, browse to location where you have kept the downloaded(and unzipped jar)```
 
-You can set the password for root as mysql or you can use any(just you need to change the places where I have incoked connection)
+```5. You can set the password for root as mysql or you can use any(just you need to change the places where I have incoked connection)```
 
-In SpokenTutorial.SQL find in this project you will find all the DDLs and intial insert vlaues to start with.
+```6. In SpokenTutorial.SQL find in this project you will find all the DDLs and intial insert vlaues to start with.```
 
-Start the project.
+```7. Start the project.```
 
-From the interface create 2 users.
+```8. From the interface create 2 users.```
 
-Now go to the database(I have used MySQL workbench) and make one user as admin(by updating the user_roles table, change the role_id from 2 to 3 to make it admin).
+```9. Now go to the database(I have used MySQL workbench) and make one user as admin(by updating the user_roles table, change the role_id from 2 to 3 to make it admin).```
