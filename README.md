@@ -23,4 +23,25 @@ Admin Interface: Can review and publish the resources uploaded by the contributo
 https://user-images.githubusercontent.com/35317861/160241985-aab48274-7f54-4a10-9f22-292a875194e7.mp4
 
 
+**Contributor Interface**: Contributes tutorial resource of physics for grade 6.
+
+
+
+https://user-images.githubusercontent.com/35317861/160242097-13a17fe4-9fdf-4f26-861c-9fb9bb42432d.mp4
+
+
+**Admin Interface**: Approving the resource contributed by the contributor int he above vdeo
+
+
+
+
+https://user-images.githubusercontent.com/35317861/160242144-ca573bfd-f04e-47b8-826f-25448fff01e1.mp4
+
+
+**Auto populating searcbox**
+
+
+https://user-images.githubusercontent.com/35317861/160242158-a19e27a6-015a-485b-8502-9843415f95fe.mp4
+
+
 
