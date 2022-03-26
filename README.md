@@ -20,7 +20,7 @@ Admin Interface: Can review and publish the resources uploaded by the contributo
 
 
 
-https://user-images.githubusercontent.com/35317861/160241985-aab48274-7f54-4a10-9f22-292a875194e7.mp4
+![](https://user-images.githubusercontent.com/35317861/160241985-aab48274-7f54-4a10-9f22-292a875194e7.mp4 | width=200)
 
 
 **Contributor Interface**: Contributes tutorial resource of physics for grade 6.
