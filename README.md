@@ -34,6 +34,40 @@ https://user-images.githubusercontent.com/35317861/160242144-ca573bfd-f04e-47b8-
 
 https://user-images.githubusercontent.com/35317861/160242158-a19e27a6-015a-485b-8502-9843415f95fe.mp4
 
+
+```Implementation: Autocomplete servelet mapping is done in web.xml file. It is called from the forntend and in backend it gets hit to this class and returns a asynchronous response as JASON. The class is defind as below.```
+
+```
+public class AutoComplete extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+    public AutoComplete() {
+        super();
+
+    }
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		ArrayList<String> al=new ArrayList<String>();
+		try{
+	     Connection conn=DataSource.getConnection();
+	     Statement stmt=conn.createStatement();
+	     String sql="select topic_name from topics";
+	     ResultSet rs = stmt.executeQuery(sql);
+	     while(rs.next()){
+	    	 al.add(rs.getString("topic_name"));
+	     }
+	     rs.close();
+	     stmt.close();
+	     conn.close();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		 JSONArray json=new JSONArray(al);
+		 response.setContentType("application/json");
+	        response.getWriter().print(json);
+	}   
+}
+```
+
 **Silent features and learnings from project**
 
 ```a. Build Maven web project on Eclipse.```
